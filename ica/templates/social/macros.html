@@ -1,0 +1,32 @@
+{% macro render_event(name, date, location, text) %}
+<div class="eight wide column">
+    <div class="ui fluid card">
+        <div class="content">
+            <div class="header">{{ name }}</div>
+            <div class="meta">
+                <span>{{ date }}</span>
+                <span>{{ location }}</span>
+            </div>
+            <p>{{ text }}</p>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro render_field(field, verbose) %}
+<div class="field">
+    {% if verbose %}
+    <label>{{ field.label }}</label>
+    {% endif %}
+    {{ field(**kwargs)|safe }}
+</div>
+{% if field.errors %}
+    <div class="ui error message">
+        <ul class="list">
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+{% endmacro %}

@@ -1,0 +1,16 @@
+{% extends "website/layout.html" %}
+{% from "website/macros.html" import render_field %}
+
+{% block title %}ICA{% endblock %}
+
+{% block content %}
+<div class="ui text container">
+    <h1>Login to ICA Social</h1>
+    <form class="ui form error" action="{{ url_for('website.login') }}" method="POST">
+        {{ form.csrf_token }}
+        {{ render_field(form.email) }}
+        {{ render_field(form.pwd) }}
+        <button class="ui button" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

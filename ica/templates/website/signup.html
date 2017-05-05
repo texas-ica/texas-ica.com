@@ -1,0 +1,33 @@
+{% extends "website/layout.html" %}
+{% from "website/macros.html" import render_field %}
+
+{% block title %}ICA{% endblock %}
+
+{% block content %}
+<div class="ui text container">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="ui positive message">
+                <i class="close icon"></i>
+                <div class="header">You have registered successfully!</div>
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <h1>Join ICA today!</h1>
+    <form class="ui form error" action="{{ url_for('website.signup') }}" method="POST">
+        {{ form.csrf_token }}
+        {{ render_field(form.fname) }}
+        {{ render_field(form.lname) }}
+        {{ render_field(form.email) }}
+        {{ render_field(form.pwd) }}
+        {{ render_field(form.pwd_confirm) }}
+        {{ render_field(form.hometown) }}
+        {{ render_field(form.major) }}
+        {{ render_field(form.year) }}
+        <button class="ui button" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

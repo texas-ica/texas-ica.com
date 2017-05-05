@@ -1,0 +1,46 @@
+{% extends "social/layout.html" %}
+{% from "social/macros.html" import render_event, render_field %}
+
+{% block title %}ICA - Social{% endblock %}
+
+{% block nav_settings %}<a class="active item" href="{{ url_for('social.settings') }}">Settings</a>{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(category_filter=["success"]) %}
+    {% if messages %}
+    <div class="ui success message">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endwith %}
+
+{% with messages = get_flashed_messages(category_filter=["error"]) %}
+    {% if messages %}
+    <div class="ui error message">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endwith %}
+
+<h3>Profile Picture</h3>
+<form action="{{ url_for('social.upload_pfpic') }}" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file"><br>
+    <button class="ui button" type="submit">Upload New Picture</button>
+</form>
+
+<h3 class="ui header">
+    Bio
+    <div class="sub header">Tell us more about yourself!</div>
+</h3>
+<form class="ui form" action="{{ url_for('social.settings') }}" method="POST">
+    {{ bio_form.csrf_token }}
+    {{ render_field(bio_form.bio) }}
+    <button class="ui button" type="submit">Update Bio</button>
+</form>
+
+{% endblock %}

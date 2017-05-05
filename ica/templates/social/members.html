@@ -1,0 +1,53 @@
+{% extends "social/layout.html" %}
+
+{% block nav_members %}<a class="active item" href="{{ url_for('social.members') }}">Members</a>{% endblock %}
+
+{% block title %}ICA - Members{% endblock %}
+
+{% block content %}
+<h3>Search for users</h3>
+<form class="ui form" action="{{ url_for('social.members') }}" method="POST">
+    {{ search_form.csrf_token }}
+    <div class="two fields">
+        {{ search_form.query }}
+        <button class="ui button" type="submit">Search</button>
+    </div>
+</form>
+
+<div class="ui four column stackable grid">
+
+    {% for member in members %}
+    <div class="column">
+        <div class="ui card">
+            <div class="image">
+                {% if member.pfpic_url %}
+                <img src="{{ url_for('static', filename='tmp/' + member.pfpic_url) }}">
+                {% else %}
+                <img src="{{ url_for('static', filename='img/filler.jpg') }}">
+                {% endif %}
+            </div>
+            <div class="content">
+                <a class="header">{{ member.fname }} {{ member.lname }}</a>
+                <div class="meta">
+                    <span class="date">{{ member.followers|length }} followers</span>
+                </div>
+                <div class="description">
+                    <p>
+                        {{ member.major }}<br>
+                        {{ member.hometown }}
+                    </p>
+                </div>
+                <div class="extra content">
+                    {% if user.is_following(member) %}
+                    <div class="ui basic red button">Unfollow</div>
+                    {% else %}
+                    <div class="ui basic green button">Follow</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "social/layout.html" %}
+{% from "social/macros.html" import render_event %}
+
+{% block nav_leaderboard %}<a class="active item" href="{{ url_for('social.leaderboard') }}">Leaderboard</a>{% endblock %}
+
+{% block title %}ICA - Social{% endblock %}
+
+{% block content %}
+<table class="ui celled table">
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Points</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in leaderboard %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                <h4 class="ui image header">
+                    {% if user.pfpic_url %}
+                        <img src="{{ url_for('static', filename='tmp/' + user.pfpic_url) }}" class="ui mini rounded image">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='img/filler.jpg') }}" class="ui mini rounded image">
+                    {% endif %}
+
+                    <div class="content">
+                        {{ user.fname }} {{ user.lname }}
+                        <div class="sub header">{{ user.year }}</div>
+                    </div>
+                </h4>
+            </td>
+            <td>{{ user.points }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

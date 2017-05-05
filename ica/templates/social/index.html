@@ -1,0 +1,17 @@
+{% extends "social/layout.html" %}
+{% from "social/macros.html" import render_event %}
+
+{% block title %}ICA - Social{% endblock %}
+
+{% block nav_overview %}<a class="active item" href="{{ url_for('social.index') }}">Overview</a>{% endblock %}
+
+{% block content %}
+
+<h1>Upcoming Events</h1>
+<div class="ui stackable grid">
+
+    {{ render_event('Trivia Night', '3/11/16', 'UTC 1.444', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.') }}
+
+    {{ render_event('Field Day', '3/11/16', 'UTC 1.444', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.') }}
+</div>
+{% endblock %}

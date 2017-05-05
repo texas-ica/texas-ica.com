@@ -1,0 +1,31 @@
+{% extends "social/layout.html" %}
+{% from "social/macros.html" import render_event %}
+
+{% block nav_followers %}<a class="active item" href="{{ url_for('social.followers') }}">Followers</a>{% endblock %}
+
+{% block title %}ICA - Social{% endblock %}
+
+{% block content %}
+<div class="ui middle aligned divided list">
+    {% if followers|length > 0 %}
+    {% for user in followers %}
+    <div class="item">
+        <div class="right floated content">
+            <div class="ui small button">Follow</div>
+        </div>
+        {% if user.pfpic_url %}
+        <img class="ui mini rounded middle aligned image" src="{{ url_for('static', filename='tmp/' + user.pfpic_url) }}">
+        {% else %}
+        <img class="ui mini rounded middle aligned image" src="{{ url_for('static', filename='img/filler.jpg') }}">
+        {% endif %}
+        <div class="content">
+            <h4 class="header">{{ user.fname }} {{ user.lname }}</h4>
+            <div class="description">{{ user.year }}</div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>You have no followers!</p>
+    {% endif %}
+</div>
+{% endblock %}

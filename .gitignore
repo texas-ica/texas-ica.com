@@ -1,0 +1,16 @@
+# Python garbage
+__pycache__
+venv/
+*.pyc
+
+# OSX garbage
+.DS_Store
+
+# User images
+ica/static/tmp/
+
+# Build
+ica/static/css/
+
+# Config file
+ica/settings.py

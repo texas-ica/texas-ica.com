@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Semantic UI CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+
+    <!-- Custom CSS -->
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="ui center aligned">
+        <div class="ui stackable menu">
+            {% block nav_home %}<a class="item" href="{{ url_for('website.index') }}">Home</a>{% endblock %}
+            {% block nav_blog %}<a class="item" href="{{ url_for('website.blog') }}">Blog</a>{% endblock %}
+            {% block nav_board %}<a class="item" href="{{ url_for('website.board') }}">Board</a>{% endblock %}
+            {% block nav_faq %}<a class="item" href="{{ url_for('website.faq') }}">FAQ</a>{% endblock %}
+
+            <div class="right menu">
+                {% if user and user.is_authenticated %}
+                    <div id="drop" class="ui pointing dropdown link item">
+
+                        {% if user.pfpic_url %}
+                        <img class="ui middle aligned mini rounded image" src="{{ url_for('static', filename='tmp/' + user.pfpic_url) }}" style="margin-right: 13px;">
+                        {% else %}
+                        <img class="ui middle aligned mini rounded image" src="{{ url_for('static', filename='img/filler.jpg') }}" style="margin-right: 13px;">
+                        {% endif %}
+
+                        <span>
+                            <strong>{{ user.fname }} {{ user.lname }}</strong>
+                            <br>
+                            {% if user.general_member %}
+                            <p>General Member</p>
+                            {% elif user.active_member %}
+                            <p>Active Member</p>
+                            {% else %}
+                            <p>Board Member</p>
+                            {% endif %}
+                        </span>
+                        <div class="menu">
+                            <a class="item" href="{{ url_for('website.logout' )}}">Log Out</a>
+                            <a class="item" href="{{ url_for('social.settings' )}}">Settings</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="item">
+                        <a href="{{ url_for('website.signup') }}"><div class="ui primary button">Sign Up</div></a>
+                    </div>
+                    <div class="item">
+                        <a href="{{ url_for('website.login') }}"><div class="ui primary button">Log In</div></a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% block header %}{% endblock %}
+    </div>
+
+    {% block app %}{% endblock %}
+
+    <!-- Footer -->
+    <div class="ui footer">
+        <div class="ui center aligned text container">
+            <p>(c) 2017 Indian Cultural Association<br>
+            Designed &amp; Developed by Shrey Desai</p>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+    <!-- Semantic UI JS -->
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+
+    <script>{% block script %}{% endblock %}</script>
+
+    <script>
+    $('#drop').dropdown();
+    </script>
+</body>
+</html>
