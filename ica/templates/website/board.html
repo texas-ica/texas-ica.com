@@ -1,11 +1,5 @@
 {% extends "website/layout.html" %}
 
-{% block script %}
-$('#test').on('click', function() {
-    $('.ui.modal').modal('show');
-});
-{% endblock %}
-
 {% block title %}ICA - Board{% endblock %}
 {% block nav_board %}<a class="active item" href="{{ url_for('website.board') }}">Board</a>{% endblock %}
 

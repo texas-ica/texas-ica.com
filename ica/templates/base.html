@@ -19,7 +19,7 @@
 
             <div class="right menu">
                 {% if user and user.is_authenticated %}
-                    <div id="drop" class="ui pointing dropdown link item">
+                    <div id="nav-profile" class="ui pointing dropdown link item">
                         <img class="ui middle aligned mini rounded image" src="{{ url_for('static', filename=user.get_pfpic()) }}" style="margin-right: 13px;">
                         <span>
                             <strong>{{ user.fname }} {{ user.lname }}</strong>
@@ -61,18 +61,12 @@
     </div>
 
     <!-- jQuery -->
-    <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
     <!-- Semantic UI JS -->
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
 
-    <script>{% block script %}{% endblock %}</script>
-
-    <script>
-    $('#drop').dropdown();
-    </script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
