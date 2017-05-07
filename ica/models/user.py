@@ -10,8 +10,12 @@ class User(Document, UserMixin):
     """ICA member account"""
 
     meta = {
-        'indexes': [{'fields': ['$fname', '$lname'],
-                    'default_language': 'english'}]
+        'indexes': [
+            {
+                'fields': ['$fname', '$lname'],
+                'default_language': 'english'
+            }
+        ]
     }
 
     # Profile information
