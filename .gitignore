@@ -11,6 +11,3 @@ ica/static/tmp/
 
 # Build
 ica/static/css/
-
-# Config file
-ica/settings.py
