@@ -15,24 +15,19 @@
         </tr>
     </thead>
     <tbody>
-        {% for user in leaderboard %}
+        {% for member in leaderboard %}
         <tr>
             <td>{{ loop.index }}</td>
             <td>
                 <h4 class="ui image header">
-                    {% if user.pfpic_url %}
-                        <img src="{{ url_for('static', filename='tmp/' + user.pfpic_url) }}" class="ui mini rounded image">
-                    {% else %}
-                        <img src="{{ url_for('static', filename='img/filler.jpg') }}" class="ui mini rounded image">
-                    {% endif %}
-
+                    <img class="ui mini rounded image" src="{{ url_for('static', filename=member.get_pfpic()) }}">
                     <div class="content">
-                        {{ user.fname }} {{ user.lname }}
-                        <div class="sub header">{{ user.year }}</div>
+                        {{ member.fname }} {{ member.lname }}
+                        <div class="sub header">{{ member.year }}</div>
                     </div>
                 </h4>
             </td>
-            <td>{{ user.points }}</td>
+            <td>{{ member.points }}</td>
         </tr>
         {% endfor %}
     </tbody>

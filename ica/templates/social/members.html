@@ -15,16 +15,11 @@
 </form>
 
 <div class="ui four column stackable grid">
-
     {% for member in members %}
     <div class="column">
         <div class="ui card">
             <div class="image">
-                {% if member.pfpic_url %}
-                <img src="{{ url_for('static', filename='tmp/' + member.pfpic_url) }}">
-                {% else %}
-                <img src="{{ url_for('static', filename='img/filler.jpg') }}">
-                {% endif %}
+                <img src="{{ url_for('static', filename=member.get_pfpic()) }}">
             </div>
             <div class="content">
                 <a class="header">{{ member.fname }} {{ member.lname }}</a>
@@ -48,6 +43,5 @@
         </div>
     </div>
     {% endfor %}
-
 </div>
 {% endblock %}

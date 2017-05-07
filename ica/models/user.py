@@ -105,7 +105,11 @@ class User(Document, UserMixin):
         user.update(set__bio=text)
 
     def get_pfpic(self):
-        pass
+        if self.pfpic_url:
+            url = 'tmp/' + self.pfpic_url
+        else:
+            url = 'img/filler.jpg'
+        return url
 
     def to_dict(self, extended=False):
         info = {

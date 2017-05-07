@@ -20,13 +20,7 @@
             <div class="right menu">
                 {% if user and user.is_authenticated %}
                     <div id="drop" class="ui pointing dropdown link item">
-
-                        {% if user.pfpic_url %}
-                        <img class="ui middle aligned mini rounded image" src="{{ url_for('static', filename='tmp/' + user.pfpic_url) }}" style="margin-right: 13px;">
-                        {% else %}
-                        <img class="ui middle aligned mini rounded image" src="{{ url_for('static', filename='img/filler.jpg') }}" style="margin-right: 13px;">
-                        {% endif %}
-
+                        <img class="ui middle aligned mini rounded image" src="{{ url_for('static', filename=user.get_pfpic()) }}" style="margin-right: 13px;">
                         <span>
                             <strong>{{ user.fname }} {{ user.lname }}</strong>
                             <br>
