@@ -24,6 +24,8 @@ $ virtualenv -p python3 venv
 
 We work within a virtual environment, so you must activate the environment every time you would like to work on the project. Do this with `source venv/bin/activate`.
 
+The configuration file requires a couple of environment variables required to build the project. These should be defined in the `activate` file inside `venv/bin`.
+
 ## Directory Structure
 
 The backend of the app is written in Flask with MongoDB as the main database. There are many frameworks used to make handling server requests easier. The following list should give a good intuition as to how the codebase is organized.
