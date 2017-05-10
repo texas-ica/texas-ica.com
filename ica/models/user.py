@@ -14,7 +14,9 @@ class User(Document, UserMixin):
             {
                 'fields': ['$fname', '$lname'],
                 'default_language': 'english'
-            }
+            },
+            'email',
+            'pfpic_url'
         ]
     }
 
