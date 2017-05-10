@@ -1,5 +1,4 @@
 import os
-import copy
 import random
 import mongoengine
 
@@ -18,7 +17,7 @@ members = f.read().strip().split('\n')
 g = open('data/cities.txt', 'r')
 cities = g.read().strip().split('\n')
 cities = [c.split('\t') for c in cities]
-cities = ['{}, {}'.format(x,y) for x,y in cities]
+cities = ['{}, {}'.format(x, y) for x, y in cities]
 
 h = open('data/majors.txt', 'r')
 majors = h.read().strip().split('\n')

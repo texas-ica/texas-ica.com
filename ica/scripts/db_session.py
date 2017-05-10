@@ -9,3 +9,5 @@ mongoengine.connect(
     password=os.getenv('DEV_DATABASE_PASSWORD'),
     host='mongodb://ds019471.mlab.com:19471'
 )
+
+users = User.objects
