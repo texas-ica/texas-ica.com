@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_login import LoginManager
+from flask_debugtoolbar import DebugToolbarExtension
 import mongoengine
 
 from ica.settings import DevelopmentConfig
@@ -23,6 +24,9 @@ mongoengine.connect(
     password=config.DATABASE_PASSWORD,
     host=config.DATABASE_HOST
 )
+
+# Debug toolbar settings
+DebugToolbarExtension(app)
 
 # Authentication settings
 login_manager = LoginManager()

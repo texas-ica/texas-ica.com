@@ -23,3 +23,13 @@ class DevelopmentConfig(Config):
     DATABASE_USER = os.getenv('DEV_DATABASE_USER')
     DATABASE_PASSWORD = os.getenv('DEV_DATABASE_PASSWORD')
     DATABASE_HOST = 'mongodb://ds019471.mlab.com:19471'
+    DEBUG_TB_PANELS = (
+        'flask_debugtoolbar.panels.versions.VersionDebugPanel',
+        'flask_debugtoolbar.panels.timer.TimerDebugPanel',
+        'flask_debugtoolbar.panels.headers.HeaderDebugPanel',
+        'flask_debugtoolbar.panels.request_vars.RequestVarsDebugPanel',
+        'flask_debugtoolbar.panels.template.TemplateDebugPanel',
+        'flask_debugtoolbar.panels.logger.LoggingPanel',
+        'flask_mongoengine.panels.MongoDebugPanel'
+    )
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
