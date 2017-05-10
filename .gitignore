@@ -11,3 +11,6 @@ ica/static/tmp/
 
 # Build
 ica/static/css/
+
+# Extra
+ica/scripts/data
