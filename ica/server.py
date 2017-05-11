@@ -21,9 +21,9 @@ parser.add_argument('-p', '--production', action='store_true', default=False,
                     help='start server with production settigns')
 args = parser.parse_args()
 
-if args.testing == True:
+if args.testing is True:
     config = TestingConfig
-elif args.development == True:
+elif args.development is True:
     config = DevelopmentConfig
 else:
     config = ProductionConfig
