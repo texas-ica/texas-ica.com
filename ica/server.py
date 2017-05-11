@@ -2,6 +2,7 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_debugtoolbar import DebugToolbarExtension
 import mongoengine
+import argparse
 
 from ica.settings import (
     ProductionConfig, DevelopmentConfig, TestingConfig
@@ -10,9 +11,25 @@ from ica.views.website import website
 from ica.views.social import social
 from ica.models.user import User
 
+# Parse command line arguments
+parser = argparse.ArgumentParser()
+parser.add_argument('-t', '--testing', action='store_true', default=False,
+                    help='start server with test settings')
+parser.add_argument('-d', '--development', action='store_true', default=False,
+                    help='start server with development settings')
+parser.add_argument('-p', '--production', action='store_true', default=False,
+                    help='start server with production settigns')
+args = parser.parse_args()
+
+if args.testing == True:
+    config = TestingConfig
+elif args.development == True:
+    config = DevelopmentConfig
+else:
+    config = ProductionConfig
+
 # Server settings
 app = Flask(__name__)
-config = TestingConfig
 app.config.from_object(config)
 
 # Register apps
@@ -48,4 +65,4 @@ def load_user(user_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
