@@ -33,3 +33,20 @@ class DevelopmentConfig(Config):
         'flask_mongoengine.panels.MongoDebugPanel'
     )
     DEBUG_TB_INTERCEPT_REDIRECTS = False
+
+
+class TestingConfig(Config):
+    DEBUG = True
+    TESTING = True
+    DATABASE_NAME = 'testing'
+    DATABASE_HOST = 'mongodb://127.0.0.1:27017'
+    DEBUG_TB_PANELS = (
+        'flask_debugtoolbar.panels.versions.VersionDebugPanel',
+        'flask_debugtoolbar.panels.timer.TimerDebugPanel',
+        'flask_debugtoolbar.panels.headers.HeaderDebugPanel',
+        'flask_debugtoolbar.panels.request_vars.RequestVarsDebugPanel',
+        'flask_debugtoolbar.panels.template.TemplateDebugPanel',
+        'flask_debugtoolbar.panels.logger.LoggingPanel',
+        'flask_mongoengine.panels.MongoDebugPanel'
+    )
+    DEBUG_TB_INTERCEPT_REDIRECTS = False

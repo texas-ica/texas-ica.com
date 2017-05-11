@@ -3,14 +3,16 @@ from flask_login import LoginManager
 from flask_debugtoolbar import DebugToolbarExtension
 import mongoengine
 
-from ica.settings import DevelopmentConfig
+from ica.settings import (
+    ProductionConfig, DevelopmentConfig, TestingConfig
+)
 from ica.views.website import website
 from ica.views.social import social
 from ica.models.user import User
 
 # Server settings
 app = Flask(__name__)
-config = DevelopmentConfig
+config = TestingConfig
 app.config.from_object(config)
 
 # Register apps
@@ -18,12 +20,18 @@ app.register_blueprint(website)
 app.register_blueprint(social, url_prefix='/social')
 
 # Database settings
-mongoengine.connect(
-    db=config.DATABASE_NAME,
-    username=config.DATABASE_USER,
-    password=config.DATABASE_PASSWORD,
-    host=config.DATABASE_HOST
-)
+db_auth = {
+    'db': config.DATABASE_NAME,
+    'host': config.DATABASE_HOST
+}
+
+if config is DevelopmentConfig or config is ProductionConfig:
+    db_auth.update({
+        'username': config.DATABASE_USER,
+        'password': config.DATABASE_PASSWORD
+    })
+
+mongoengine.connect(**db_auth)
 
 # Debug toolbar settings
 DebugToolbarExtension(app)
