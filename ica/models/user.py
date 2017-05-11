@@ -67,10 +67,9 @@ class User(Document, UserMixin):
 
     @staticmethod
     def get_points_leaderboard(cutoff):
-        leaderboard = sorted(User.objects, key=lambda x: x.points,
-                             reverse=True)
-        leaderboard = leaderboard[:cutoff]
-        return [x for x in leaderboard if x.points != 0]
+        leaderboard = User.objects.order_by('-points').filter(points__gt=0)
+        leaderboard = leaderboard.filter(points__gt=0)
+        return leaderboard
 
     @staticmethod
     def search(query):
