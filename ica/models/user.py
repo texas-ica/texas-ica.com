@@ -5,6 +5,8 @@ from mongoengine import (
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from ica.cache import cache
+
 
 class User(Document, UserMixin):
     """ICA member account"""
@@ -66,10 +68,10 @@ class User(Document, UserMixin):
         return generate_password_hash(pwd)
 
     @staticmethod
+    @cache.cached(timeout=60 * 60)
     def get_points_leaderboard(cutoff):
         leaderboard = User.objects.order_by('-points').filter(points__gt=0)
-        leaderboard = leaderboard.filter(points__gt=0)
-        return leaderboard
+        return leaderboard[:cutoff]
 
     @staticmethod
     def search(query):
@@ -81,6 +83,7 @@ class User(Document, UserMixin):
     def check_password(self, pwd):
         return check_password_hash(self.pwd, pwd)
 
+    @cache.cached(timeout=60 * 60)
     def is_top_member(self, limit):
         leaderboard = set(User.get_points_leaderboard(limit))
         return self in leaderboard
@@ -95,7 +98,6 @@ class User(Document, UserMixin):
     def unfollow_user(self, user):
         user_a = User.objects(email=self.email)
         user_b = User.objects(email=user.email)
-
         user_a.update(pull__following=user)
         user_b.update(pull__followers=self)
 

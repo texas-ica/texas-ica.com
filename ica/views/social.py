@@ -6,6 +6,7 @@ from flask_login import login_required, current_user
 
 from ica.models.user import User
 from ica.forms import BioForm, SearchForm
+from ica.cache import cache
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 UPLOAD_FOLDER = 'tmp'
@@ -28,6 +29,7 @@ def generate_token():
 
 @social.route('/', methods=['GET'])
 @login_required
+@cache.cached(timeout=60)
 def index():
     return render_template('social/index.html', **{
         'user': current_user
@@ -35,6 +37,7 @@ def index():
 
 
 @social.route('/members', methods=['GET', 'POST'])
+@cache.cached(timeout=300)
 @login_required
 def members():
     member_set = User.objects
@@ -50,6 +53,7 @@ def members():
 
 
 @social.route('/leaderboard', methods=['GET'])
+@cache.cached(timeout=300)
 @login_required
 def leaderboard():
     leaderboard = User.get_points_leaderboard(10)
@@ -60,6 +64,7 @@ def leaderboard():
 
 
 @social.route('/followers', methods=['GET'])
+@cache.cached(timeout=300)
 @login_required
 def followers():
     followers = current_user.get_followers()

@@ -10,6 +10,7 @@ from ica.settings import (
 from ica.views.website import website
 from ica.views.social import social
 from ica.models.user import User
+from ica.cache import cache
 
 # Parse command line arguments
 parser = argparse.ArgumentParser()
@@ -49,6 +50,9 @@ if config is DevelopmentConfig or config is ProductionConfig:
     })
 
 mongoengine.connect(**db_auth)
+
+# Cache settings
+cache.init_app(app)
 
 # Debug toolbar settings
 DebugToolbarExtension(app)
