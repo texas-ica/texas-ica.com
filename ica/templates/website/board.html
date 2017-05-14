@@ -13,34 +13,32 @@
 {% block content %}
 <div class="ui container">
     <div class="ui four column stackable grid">
-        <div class="row">
-
-            <div class="column">
-                <div class="ui fluid card">
-                    <div class="image">
-                        <img src="{{ url_for('static', filename='img/shrey.jpg') }}">
-                    </div>
-                    <div class="content">
-                        <a id="test" class="header" href="#">Shrey Desai</a>
-                        <div class="meta">
-                            <p>Technology Director</p>
-                        </div>
-
+        {% for key, value in data %}
+        <div class="column">
+            <div class="ui fluid card">
+                <div class="image">
+                    <img src="{{ url_for('static', filename='img/' + value.pic) }}">
+                </div>
+                <div class="content">
+                    <a id="prof-{{ key }}" class="header" href="#">{{ value.name }}</a>
+                    <div class="meta">
+                        <p>{{ value.position }}</p>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
-</div>
-
-<div class="ui small modal">
-    <div class="header">Shrey Desai</div>
-    <div class="content">
-        <p><strong>Position:</strong> Technology Director</p>
-        <p><strong>Major:</strong>  Computer Science</p>
-        <p><strong>Minor/Certificate(s):</strong> Applied Statistical Modeling</p>
-        <p>Hi! I’m Shrey and I’m very excited to be your Technology Director this year! I’m originally from the Bay Area in California. I love biking, criminology, sarcasm, memes, milk tea, and hip-hop/rap music. A fun fact about me is that I reluctantly got my driver’s license when I was 18. Let me know if you have any questions - I’d be more than happy to help you out!</p>
+        <div id="modal-{{ key }}" class="ui small modal">
+            <div class="content">
+                <img class="ui centered small circular image" src="{{ url_for('static', filename='img/' + value.pic) }}">
+                <h1 class="ui center aligned header">
+                    {{ value.name }}
+                    <div class="sub header">{{ value.position }}</div>
+                    <div class="sub header">{{ value.year }} // {{ value.major }}</div>
+                </h1>
+                <p>{{ value.bio }}</p>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

@@ -1,4 +1,10 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+import os
+import json
+
+from flask import (
+    Blueprint, render_template, request, redirect, url_for,
+    flash, session
+)
 from flask_login import login_user, logout_user, current_user
 
 from ica.models.user import User
@@ -23,8 +29,15 @@ def blog():
 
 @website.route('/board', methods=['GET'])
 def board():
+    parent = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    path = os.path.join(parent, 'data', 'board.json')
+    stream = open(path, 'r')
+    data = json.load(stream)
+    stream.close()
+    sorted_data = sorted(data.items(), key=lambda i: int(i[0]))
     return render_template('website/board.html', **{
-        'user': current_user
+        'user': current_user,
+        'data': sorted_data
     })
 
 
