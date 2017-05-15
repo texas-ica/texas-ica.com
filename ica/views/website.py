@@ -72,7 +72,8 @@ def signup():
 
 @website.route('/login', methods=['GET', 'POST'])
 def login():
-    # TODO: redirect if user is already logged in
+    if current_user.is_authenticated:
+        return redirect(url_for('social.index'))
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate():
         user = User.objects(email=form.email.data).first()
