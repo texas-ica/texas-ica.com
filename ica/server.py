@@ -1,8 +1,9 @@
+import mongoengine
+import argparse
+
 from flask import Flask
 from flask_login import LoginManager
 from flask_debugtoolbar import DebugToolbarExtension
-import mongoengine
-import argparse
 
 from ica.settings import (
     ProductionConfig, DevelopmentConfig, TestingConfig
