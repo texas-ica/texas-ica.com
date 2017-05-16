@@ -23,12 +23,12 @@ parser.add_argument('-p', '--production', action='store_true', default=False,
                     help='start server with production settigns')
 args = parser.parse_args()
 
-if args.testing is True:
-    config = TestingConfig
+if args.production is True:
+    config = ProductionConfig
 elif args.development is True:
     config = DevelopmentConfig
 else:
-    config = ProductionConfig
+    config = TestingConfig
 
 # Server settings
 app = Flask(__name__)
