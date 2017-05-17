@@ -8,6 +8,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from ica.settings import (
     ProductionConfig, DevelopmentConfig, TestingConfig
 )
+from ica.api.v1 import api
 from ica.views.website import website
 from ica.views.social import social
 from ica.models.user import User
@@ -37,6 +38,7 @@ app.config.from_object(config)
 # Register apps
 app.register_blueprint(website)
 app.register_blueprint(social, url_prefix='/social')
+app.register_blueprint(api, url_prefix='/api/v1')
 
 # Database settings
 db_auth = {
