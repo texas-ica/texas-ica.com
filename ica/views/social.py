@@ -1,5 +1,4 @@
 import os
-import uuid
 
 from flask import Blueprint, render_template, redirect, request, flash, url_for
 from flask_login import login_required, current_user

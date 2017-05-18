@@ -1,4 +1,5 @@
 import json
+import uuid
 
 
 def get_file_extension(filename):
@@ -10,7 +11,7 @@ def get_file_extension(filename):
 
 
 def allowed_filename(filename, whitelist):
-    """Determines if the file extension is in the whitelist""" 
+    """Determines if the file extension is in the whitelist"""
     return '.' in filename and \
            get_file_extension(filename) in whitelist
 
