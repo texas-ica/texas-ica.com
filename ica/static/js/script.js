@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+(function($) {
     // nav dropdown
     $('#nav-profile').dropdown();
 
@@ -12,4 +12,4 @@ jQuery(document).ready(function($) {
             $(modal_id).modal('show');
         });
     }
-});
+})(jQuery);
