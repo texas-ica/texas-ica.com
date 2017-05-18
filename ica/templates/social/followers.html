@@ -11,7 +11,11 @@
     {% for follower in followers %}
     <div class="item">
         <div class="right floated content">
-            <div class="ui small button">Follow</div>
+            {% if user.is_following(follower) %}
+            <a class="ui basic red button" href="{{ 'unfollow/' + follower.email }}">Unfollow</a>
+            {% else %}
+            <a class="ui basic green button" href="{{ 'follow/' + follower.email }}">Follow</a>
+            {% endif %}
         </div>
         <img class="ui mini rounded middle aligned image" src="{{ url_for('static', filename=follower.get_pfpic()) }}">
         <div class="content">

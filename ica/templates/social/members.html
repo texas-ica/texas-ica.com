@@ -34,9 +34,9 @@
                 </div>
                 <div class="extra content">
                     {% if user.is_following(member) %}
-                    <div class="ui basic red button">Unfollow</div>
+                    <a class="ui basic red button" href="{{ 'unfollow/' + member.email }}">Unfollow</a>
                     {% else %}
-                    <div class="ui basic green button">Follow</div>
+                    <a class="ui basic green button" href="{{ 'follow/' + member.email }}">Follow</a>
                     {% endif %}
                 </div>
             </div>

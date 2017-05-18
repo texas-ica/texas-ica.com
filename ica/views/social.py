@@ -6,7 +6,7 @@ from flask_login import login_required, current_user
 
 from ica.models.user import User
 from ica.forms import BioForm, SearchForm
-from ica.cache import cache
+from ica.utils import get_file_extension, allowed_filename, generate_token
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 UPLOAD_FOLDER = 'tmp'
@@ -14,22 +14,8 @@ UPLOAD_FOLDER = 'tmp'
 social = Blueprint('social', __name__, template_folder='templates')
 
 
-def get_file_extension(filename):
-    return filename.rsplit('.', 1)[1].lower()
-
-
-def allowed_filename(filename):
-    return '.' in filename and \
-           get_file_extension(filename) in ALLOWED_EXTENSIONS
-
-
-def generate_token():
-    return uuid.uuid4().hex
-
-
 @social.route('/', methods=['GET'])
 @login_required
-@cache.cached(timeout=60)
 def index():
     return render_template('social/index.html', **{
         'user': current_user
@@ -37,7 +23,6 @@ def index():
 
 
 @social.route('/members', methods=['GET', 'POST'])
-@cache.cached(timeout=300)
 @login_required
 def members():
     member_set = User.objects
@@ -48,12 +33,13 @@ def members():
     return render_template('social/members.html', **{
         'user': current_user,
         'search_form': search_form,
-        'members': member_set
+        'members': member_set.order_by('fname').filter(
+            email__ne=current_user.email
+        )
     })
 
 
 @social.route('/leaderboard', methods=['GET'])
-@cache.cached(timeout=300)
 @login_required
 def leaderboard():
     leaderboard = User.get_points_leaderboard(10)
@@ -64,7 +50,6 @@ def leaderboard():
 
 
 @social.route('/followers', methods=['GET'])
-@cache.cached(timeout=300)
 @login_required
 def followers():
     followers = current_user.get_followers()
@@ -105,7 +90,7 @@ def upload_pfpic():
             flash('You have not selected a picture to upload.', 'error')
             return redirect(url_for('social.settings'))
 
-        if not allowed_filename(pic.filename):
+        if not allowed_filename(pic.filename, ALLOWED_EXTENSIONS):
             flash('You selected an incorrect file type. Only ' +
                   ' png, jpg, jpeg, and gif types are allowed.', 'error')
             return redirect(url_for('social.settings'))
@@ -128,3 +113,24 @@ def upload_pfpic():
             users.update_one(set__pfpic_url=filename)
 
             return redirect(url_for('social.settings'))
+
+
+@social.route('/follow/<string:email>', methods=['GET'])
+@login_required
+def follow_member(email):
+    user_a = User.objects(email=current_user.email).first()
+    user_b = User.objects(email=email).first()
+
+    if user_b:
+        user_a.follow_user(user_b)
+    return redirect(url_for('social.followers'))
+
+
+@social.route('/unfollow/<string:email>', methods=['GET'])
+@login_required
+def unfollow_member(email):
+    user_a = User.objects(email=current_user.email).first()
+    user_b = User.objects(email=email).first()
+    if user_b:
+        user_a.unfollow_user(user_b)
+    return redirect(url_for('social.followers'))

@@ -91,7 +91,7 @@ class User(Document, UserMixin):
     def follow_user(self, user):
         user_a = User.objects(email=self.email)
         user_b = User.objects(email=user.email)
-        if user_a is not user_b:
+        if user_a.first().email != user_b.first().email:
             user_a.update(add_to_set__following=user)
             user_b.update(add_to_set__followers=self)
 
