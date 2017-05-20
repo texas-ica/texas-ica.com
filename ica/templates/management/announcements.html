@@ -1,0 +1,34 @@
+{% extends "management/layout.html" %}
+{% from "macros.html" import render_field, render_success %}
+
+{% block content %}
+<div class="ui breadcrumb">
+    <a class="section" href="{{ url_for('management.index') }}">Management</a>
+    <div class="divider"> / </div>
+    <a class="section" href="{{ url_for('management.announcements') }}">Announcements</a>
+</div>
+
+{{ render_success('Your announcement was successfully posted!') }}
+
+<h3 class="ui header">Your Announcements</h3>
+
+{% if msgs %}
+<div class="ui relaxed divided small list">
+    {% for msg in msgs %}
+    <div class="item">
+        <i class="big talk middle aligned icon"></i>
+        <div class="content">
+            <div class="description">{{ msg.creation_date.strftime('%m/%d/%Y')}} - {{ msg.message }}</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<h3 class="ui header">Create an Announcement</h3>
+<form class="ui form error" action="{{ url_for('management.announcements') }}" method="POST">
+    {{ form.csrf_token }}
+    {{ render_field(form.text, True, placeholder="Announcement Message") }}
+    <button class="ui button" type="submit">Post Announcement</button>
+</form>
+{% endblock %}

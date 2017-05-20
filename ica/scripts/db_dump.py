@@ -1,14 +1,11 @@
-import os
 import random
 import mongoengine
 
 from ica.models.user import User
 
 mongoengine.connect(
-    db='development',
-    username=os.getenv('DEV_DATABASE_USER'),
-    password=os.getenv('DEV_DATABASE_PASSWORD'),
-    host='mongodb://ds019471.mlab.com:19471'
+    db='testing',
+    host='mongodb://localhost:27017'
 )
 
 f = open('data/members.txt', 'r')

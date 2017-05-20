@@ -35,6 +35,8 @@ def get_users_by_search(query):
 
     if users:
         users = [user.to_dict() for user in users]
+    else:
+        users = None
 
     return jsonify({
         'success': True,

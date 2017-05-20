@@ -1,0 +1,41 @@
+{% extends "management/layout.html" %}
+{% from "macros.html" import render_field, render_success %}
+
+{% block content %}
+<div class="ui breadcrumb">
+    <a class="section" href="{{ url_for('management.index') }}">Management</a>
+    <div class="divider"> / </div>
+    <a class="section" href="{{ url_for('management.events') }}">Events</a>
+</div>
+
+{{ render_success("Your event was successfully saved!") }}
+
+<h3 class="ui header">Your Events</h3>
+{% if events %}
+<div class="ui relaxed divided small list">
+    {% for event in events %}
+    <div class="item">
+        <i class="big checked calendar middle aligned icon"></i>
+        <div class="content">
+            <p class="header">{{ event.name }} ({{ event.pts }} pts/hr)</p>
+            <div class="description">{{ event.datetime.strftime('%m/%d/%Y') }} @ {{ event.location }}</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<h3 class="ui header">Create an Event</h3>
+
+<form class="ui form error" action="{{ url_for('management.events') }}" method="POST">
+    {{ form.csrf_token }}
+    {{ render_field(form.name) }}
+    {{ render_field(form.datetime, id="event-datepicker") }}
+    {{ render_field(form.location) }}
+    {{ render_field(form.description) }}
+    {{ render_field(form.pts) }}
+    {{ render_field(form.fb_link) }}
+    <button class="ui button" type="submit">Create Event</button>
+</form>
+
+{% endblock %}

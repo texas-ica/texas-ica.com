@@ -1,0 +1,11 @@
+{% extends "management/layout.html" %}
+
+{% block content %}
+<div class="ui breadcrumb">
+    <a class="section" href="{{ url_for('management.index') }}">Management</a>
+    <div class="divider"> / </div>
+    <a class="section" href="{{ url_for('management.points') }}">Points</a>
+</div>
+
+<h3 class="ui header">Add Points</h3>
+{% endblock %}

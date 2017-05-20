@@ -6,12 +6,46 @@
 {% block nav_overview %}<a class="active item" href="{{ url_for('social.index') }}">Overview</a>{% endblock %}
 
 {% block content %}
-
-<h1>Upcoming Events</h1>
-<div class="ui stackable grid">
-
-    {{ render_event('Trivia Night', '3/11/16', 'UTC 1.444', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.') }}
-
-    {{ render_event('Field Day', '3/11/16', 'UTC 1.444', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.') }}
+<h3 class="ui header">Announcements</h3>
+{% if msgs %}
+<div class="ui feed">
+    {% for msg in msgs %}
+    <div class="event">
+        <div class="label">
+            <img src="{{ url_for('static', filename=msg.author.get_pfpic()) }}">
+        </div>
+        <div class="content">
+            <div class="summary">
+                <a class="user">{{ msg.author.fname }} {{ msg.author.lname }}</a>
+                <div class="date">{{ msg.creation_date.strftime('%m/%d') }}</div>
+            </div>
+            <div class="extra text">{{ msg.message }}</div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
+{% else %}
+<p>There are no announcements.</p>
+{% endif %}
+
+<h3 class="ui header">Upcoming Events</h3>
+{% if events %}
+<div class="ui stackable grid">
+    {% for event in events %}
+    <div class="eight wide column">
+        <div class="ui fluid card">
+            <div class="content">
+                <div class="header">{{ event.name }}</div>
+                <div class="meta">
+                    <span>{{ event.datetime.strftime('%m/%d') }} @ {{ event.location }}</span>
+                </div>
+                <p>{{ event.description|truncate(150) }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>There are no upcoming events.</p>
+{% endif %}
 {% endblock %}

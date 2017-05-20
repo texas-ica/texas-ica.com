@@ -70,12 +70,17 @@ class User(Document, UserMixin):
     @staticmethod
     @cache.cached(timeout=60 * 60)
     def get_points_leaderboard(cutoff):
-        leaderboard = User.objects.order_by('-points').filter(points__gt=0)
+        fields = ['fname', 'lname', 'pfpic_url', 'year', 'points']
+        leaderboard = User.objects.only(*fields).order_by(
+            '-points'
+        ).filter(points__gt=0)
         return leaderboard[:cutoff]
 
     @staticmethod
     def search(query):
-        return User.objects.search_text(query)
+        fields = ['fname', 'lname', 'followers', 'year',
+                  'hometown', 'pfpic_url']
+        return User.objects.only(*fields).search_text(query)
 
     def get_id(self):
         return str(self.id)
@@ -83,10 +88,10 @@ class User(Document, UserMixin):
     def check_password(self, pwd):
         return check_password_hash(self.pwd, pwd)
 
-    @cache.cached(timeout=60 * 60)
     def is_top_member(self, limit):
-        leaderboard = set(User.get_points_leaderboard(limit))
-        return self in leaderboard
+        # leaderboard = set(User.get_points_leaderboard(limit))
+        # return self in leaderboard
+        return False
 
     def follow_user(self, user):
         user_a = User.objects(email=self.email)
@@ -105,7 +110,8 @@ class User(Document, UserMixin):
         return user in self.following
 
     def get_followers(self):
-        return User.objects(following=self)
+        fields = ['fname', 'lname', 'year', 'email']
+        return User.objects(following=self).only(*fields)
 
     def update_bio(self, text):
         user = User.objects(email=self.email)

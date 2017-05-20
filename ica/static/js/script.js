@@ -2,6 +2,9 @@
     // nav dropdown
     $('#nav-profile').dropdown();
 
+    // apps dropdown
+    $('#nav-apps').dropdown();
+
     // board members
     var members = 14;
     for (var i = 0; i <= members; i++) {
@@ -12,4 +15,7 @@
             $(modal_id).modal('show');
         });
     }
+
+    // event datepicker
+    //$('#event-datepicker').datepicker();
 })(jQuery);

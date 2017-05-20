@@ -5,9 +5,8 @@ class Config(object):
     SECRET_KEY = os.getenv('SECRET_KEY')
     CSRF_TOKEN = os.getenv('CSRF_TOKEN')
     MAX_CONTENT_LENGTH = 0.5 * 1024 * 1024
-    CACHE_TYPE = 'filesystem'
-    CACHE_THRESHOLD = 128
-    CACHE_DIR = '/tmp'
+    CACHE_TYPE = 'redis'
+    CACHE_REDIS_URL = os.getenv('REDIS_DATABASE_URL')
 
 
 class ProductionConfig(Config):

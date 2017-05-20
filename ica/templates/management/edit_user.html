@@ -1,0 +1,50 @@
+{% extends "management/layout.html" %}
+{% from "macros.html" import render_field %}
+
+{% block content %}
+{% if focus %}
+
+<div class="ui breadcrumb">
+    <a class="section" href="{{ url_for('management.index') }}">Management</a>
+    <div class="divider"> / </div>
+    <a class="section" href="{{ url_for('management.edit') }}">Database</a>
+    <div class="divider"> / </div>
+    <a class="section" href="{{ url_for('management.edit_user', user_id=focus.id) }}">{{ focus.fname }} {{ focus.lname }}</a>
+</div>
+
+<div class="ui text center aligned container">
+    <h2>{{ focus.fname }} {{ focus.lname }}</h2>
+    <img class="ui small rounded middle aligned image" src="{{ url_for('static', filename=focus.get_pfpic()) }}">
+</div>
+
+<div class="ui text container">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="ui positive message">
+                <i class="close icon"></i>
+                <div class="header">The database was successfully updated!</div>
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <form class="ui form error" action="{{ url_for('management.edit_user', user_id=focus.id) }}" method="POST">
+        {{ form.csrf_token }}
+        {{ render_field(form.fname, placeholder=focus.fname) }}
+        {{ render_field(form.lname, placeholder=focus.lname) }}
+        {{ render_field(form.major, placeholder=focus.major) }}
+        {{ render_field(form.year, placeholder=focus.year) }}
+        {{ render_field(form.points, placeholder=focus.points) }}
+        {{ render_field(form.board_member, placeholder=focus.board_member) }}
+        {{ render_field(form.board_position, placeholder=focus.board_position) }}
+        {{ render_field(form.general_member, placeholder=focus.general_member) }}
+        {{ render_field(form.active_member, placeholder=focus.active_member) }}
+        {{ render_field(form.spotlight, placeholder=focus.spotlight) }}
+        <button class="ui button" type="submit">Save Changes</button>
+    </form>
+</div>
+{% else %}
+<p>Invalid User</p>
+{% endif %}
+{% endblock %}

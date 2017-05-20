@@ -1,0 +1,29 @@
+{% macro render_field(field, mask) %}
+<div class="field">
+    {% if not mask %}
+    <label>{{ field.label }}</label>
+    {% endif %}
+    {{ field(**kwargs)|safe }}
+</div>
+{% if field.errors %}
+    <div class="ui error message">
+        {% for error in field.errors %}
+        <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endmacro %}
+
+{% macro render_success(header) %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="ui small positive message">
+            <i class="close icon"></i>
+            <div class="header">{{ header }}</div>
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+{% endmacro %}

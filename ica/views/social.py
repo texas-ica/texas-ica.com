@@ -1,11 +1,16 @@
 import os
+import datetime
 
 from flask import Blueprint, render_template, redirect, request, flash, url_for
 from flask_login import login_required, current_user
 
 from ica.models.user import User
-from ica.forms import BioForm, SearchForm
-from ica.utils import get_file_extension, allowed_filename, generate_token
+from ica.models.announcement import Announcement
+from ica.models.event import Event
+from ica.forms import ProfileForm, SearchForm
+from ica.utils import (
+    get_file_extension, allowed_filename, generate_token, resize_image
+)
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 UPLOAD_FOLDER = 'tmp'
@@ -16,32 +21,57 @@ social = Blueprint('social', __name__, template_folder='templates')
 @social.route('/', methods=['GET'])
 @login_required
 def index():
+    # Get top 5 most recent announcements
+    msgs_fields = ['author', 'message', 'creation_date']
+    msgs = Announcement.objects.only(
+        *msgs_fields
+    ).order_by('-creation_date').select_related()[:5]
+
+    # Get upcoming events
+    events_fields = ['name', 'datetime', 'location', 'description',
+                     'pts', 'fb_link']
+    events = Event.objects.only(
+        *events_fields
+    ).order_by('-creation_date').select_related()
+
+    # Filter events based on their time - if it is upcoming relative
+    # to today's date, then it is included
+    events = [event for event in events if
+              event.datetime > datetime.datetime.now()]
+
     return render_template('social/index.html', **{
-        'user': current_user
+        'user': current_user,
+        'msgs': msgs,
+        'events': events
     })
 
 
 @social.route('/members', methods=['GET', 'POST'])
 @login_required
 def members():
-    member_set = User.objects
+    member_set = None
     search_form = SearchForm(request.form)
     if request.method == 'POST' and search_form.validate():
         query = search_form.query.data
-        member_set = User.search(query)
+        fields = ['fname', 'lname', 'followers', 'year',
+                  'hometown', 'pfpic_url']
+        member_set = User.objects.only(*fields).search_text(
+            query
+        ).order_by('fname').filter(id__ne=current_user.id)
     return render_template('social/members.html', **{
         'user': current_user,
         'search_form': search_form,
-        'members': member_set.order_by('fname').filter(
-            email__ne=current_user.email
-        )
+        'members': member_set
     })
 
 
 @social.route('/leaderboard', methods=['GET'])
 @login_required
 def leaderboard():
-    leaderboard = User.get_points_leaderboard(10)
+    fields = ['fname', 'lname', 'pfpic_url', 'year', 'points']
+    leaderboard = User.objects.only(*fields).order_by('-points')[:10]
+    leaderboard = [user for user in leaderboard if user.points > 0]
+    print('entered leaderboard page view')
     return render_template('social/leaderboard.html', **{
         'user': current_user,
         'leaderboard': leaderboard
@@ -51,7 +81,10 @@ def leaderboard():
 @social.route('/followers', methods=['GET'])
 @login_required
 def followers():
-    followers = current_user.get_followers()
+    fields = ['fname', 'lname', 'year', 'email']
+    followers = User.objects(following=current_user.id).only(
+        *fields
+    ).order_by('fname')
     return render_template('social/followers.html', **{
         'user': current_user,
         'followers': followers
@@ -61,15 +94,21 @@ def followers():
 @social.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings():
-    bio_form = BioForm(request.form)
-    if request.method == 'POST' and bio_form.validate():
-        user = User.objects(email=current_user.email).first()
-        user.update_bio(bio_form.bio.data)
-        flash('Your bio was successfully updated!', 'success')
+    profile_form = ProfileForm(request.form)
+    if request.method == 'POST' and profile_form.validate():
+        if profile_form.bio.data:
+            current_user.update(set__bio=profile_form.bio.data)
+        if profile_form.hometown.data:
+            current_user.update(set__hometown=profile_form.hometown.data)
+        if profile_form.major.data:
+            current_user.update(set__major=profile_form.major.data)
+        if profile_form.year.data:
+            current_user.update(set__year=profile_form.year.data)
+        flash('Your profile was successfully updated!', 'success')
         return redirect(url_for('social.settings'))
     return render_template('social/settings.html', **{
         'user': current_user,
-        'bio_form': bio_form
+        'profile_form': profile_form
     })
 
 
@@ -94,7 +133,7 @@ def upload_pfpic():
                   ' png, jpg, jpeg, and gif types are allowed.', 'error')
             return redirect(url_for('social.settings'))
 
-        if pic and allowed_filename(pic.filename):
+        if pic and allowed_filename(pic.filename, ALLOWED_EXTENSIONS):
             # Generate unique picture token
             ext = get_file_extension(pic.filename)
             filename = '{}.{}'.format(generate_token(), ext)
@@ -105,31 +144,40 @@ def upload_pfpic():
             )
             upload_folder = os.path.join(parent, 'static', UPLOAD_FOLDER)
             pic.save(os.path.join(upload_folder, filename))
+
+            # Resize image
+            resize_image(upload_folder, filename)
+
             flash('Your picture was successfully uploaded!', 'success')
 
+            # Remove old picture if it exists
+            if current_user.pfpic_url is not None:
+                os.remove(os.path.join(upload_folder, current_user.pfpic_url))
+
             # Update user model with picture location
-            users = User.objects(email=current_user.email)
-            users.update_one(set__pfpic_url=filename)
+            current_user.update(set__pfpic_url=filename)
 
             return redirect(url_for('social.settings'))
 
 
-@social.route('/follow/<string:email>', methods=['GET'])
+@social.route('/follow/<string:user_id>', methods=['GET'])
 @login_required
-def follow_member(email):
-    user_a = User.objects(email=current_user.email).first()
-    user_b = User.objects(email=email).first()
-
+def follow_member(user_id):
+    user_b = User.objects(id=user_id).only('id').first()
     if user_b:
-        user_a.follow_user(user_b)
+        user_a = User.objects(id=current_user.id).only('id').first()
+        if user_b.id != user_a.id:
+            user_a.update(add_to_set__following=user_b)
+            user_b.update(add_to_set__followers=user_a)
     return redirect(url_for('social.followers'))
 
 
-@social.route('/unfollow/<string:email>', methods=['GET'])
+@social.route('/unfollow/<string:user_id>', methods=['GET'])
 @login_required
-def unfollow_member(email):
-    user_a = User.objects(email=current_user.email).first()
-    user_b = User.objects(email=email).first()
+def unfollow_member(user_id):
+    user_b = User.objects(id=user_id).only('id').first()
     if user_b:
-        user_a.unfollow_user(user_b)
+        user_a = User.objects(id=current_user.id).only('id').first()
+        user_a.update(pull__following=user_b)
+        user_b.update(pull__followers=user_a)
     return redirect(url_for('social.followers'))

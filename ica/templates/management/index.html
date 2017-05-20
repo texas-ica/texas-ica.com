@@ -1,0 +1,59 @@
+{% extends "management/layout.html" %}
+
+{% block title %}ICA - Management{% endblock %}
+
+{% block content %}
+
+<h1 class="ui center aligned header">
+    Management
+    <div class="sub header">Administration dashboard for ICA board members</div>
+</h1>
+
+<div class="ui container">
+    <div class="ui left aligned stackable three column grid">
+        <div class="column">
+            <h3 class="ui center aligned icon header">
+                <i class="database icon"></i>
+                <a href="{{ url_for('management.edit') }}">Database</a>
+            </h3>
+            <p>Edit the database for various items by searching for users</p>
+        </div>
+        <div class="column">
+            <h3 class="ui center aligned icon header">
+                <i class="user icon"></i>
+                <a href="{{ url_for('management.points') }}">Points</a>
+            </h3>
+            <p>Add points for multiple users after an ICA event</p>
+        </div>
+        <div class="column">
+            <h3 class="ui center aligned icon header">
+                <i class="add to calendar icon"></i>
+                <a href="{{ url_for('management.events') }}">Events</a>
+            </h3>
+            <p>Create an event for the social network dashboard</p>
+        </div>
+        <div class="column">
+            <h3 class="ui center aligned icon header">
+                <i class="announcement icon"></i>
+                <a href="{{ url_for('management.announcements') }}">Announcements</a>
+            </h3>
+            <p>Create an announcement for the social network dashboard</p>
+        </div>
+        <div class="column">
+            <h3 class="ui center aligned icon header">
+                <i class="tasks icon"></i>
+                Log
+            </h3>
+            <p>Log of various events around the website, database, and API</p>
+        </div>
+        <div class="column">
+            <h3 class="ui center aligned icon header">
+                <i class="area chart icon"></i>
+                Analytics
+            </h3>
+            <p>Data visualization of ICA participation and activity</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

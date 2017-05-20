@@ -15,9 +15,7 @@
 
 {% macro render_field(field, verbose) %}
 <div class="field">
-    {% if verbose %}
     <label>{{ field.label }}</label>
-    {% endif %}
     {{ field(**kwargs)|safe }}
 </div>
 {% if field.errors %}

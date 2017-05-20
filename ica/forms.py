@@ -1,6 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SelectField
-from wtforms.validators import DataRequired, EqualTo, Email
+from wtforms import (
+    StringField, PasswordField, SelectField, IntegerField, BooleanField,
+    DecimalField, DateField
+)
+from wtforms.validators import (
+    DataRequired, Length, EqualTo, Email, optional
+)
 
 from ica.models.user import User
 
@@ -72,13 +77,70 @@ class LoginForm(FlaskForm):
         return True
 
 
-class BioForm(FlaskForm):
-    """Form to update profile bio/description"""
+class ProfileForm(FlaskForm):
+    """Form to update profile settings"""
 
     bio = StringField('Bio')
+    hometown = StringField('Hometown')
+    major = StringField('Major')
+    year = SelectField('Year', choices=[
+        ('Freshman', 'Freshman'), ('Sophomore', 'Sophomore'),
+        ('Junior', 'Junior'), ('Senior', 'Senior'),
+        ('Super Senior', 'Super Senior')
+    ])
 
 
 class SearchForm(FlaskForm):
     """Form used to query for users on the members page"""
 
     query = StringField('Query')
+
+
+class DatabaseEditForm(FlaskForm):
+    """
+    Comprehensive form used to edit user settings - used on
+    the board member management page
+    """
+
+    fname = StringField('First Name')
+    lname = StringField('Last Name')
+    email = StringField('Email')
+    hometown = StringField('Hometown')
+    major = StringField('Major')
+    year = SelectField('Year', choices=[
+        ('Freshman', 'Freshman'), ('Sophomore', 'Sophomore'),
+        ('Junior', 'Junior'), ('Senior', 'Senior'),
+        ('Super Senior', 'Super Senior')
+    ])
+    points = IntegerField('Points', [optional()])
+    board_member = BooleanField('Board Member')
+    board_position = StringField('Board Position')
+    general_member = BooleanField('General Member')
+    active_member = BooleanField('Active Member')
+    spotlight = BooleanField('Spotlight')
+
+
+class AnnouncementForm(FlaskForm):
+    """
+    Form to create an announcement - shows up on the ICA
+    social network oveview page
+    """
+
+    text = StringField('Announcement Message', [
+        Length(min=1, max=300), DataRequired()
+    ])
+
+
+class EventForm(FlaskForm):
+    """
+    Form to create an event - shows up on the ICA social
+    network overview page
+    """
+
+    name = StringField('Name', [DataRequired()])
+    datetime = DateField('Date (ex: 05/20/2017)',
+                         [DataRequired()], format='%m/%d/%Y')
+    location = StringField('Location', [DataRequired()])
+    description = StringField('Description', [DataRequired()])
+    pts = DecimalField('Points per Hour', [DataRequired()])
+    fb_link = StringField('Facebook Event Link (optional)')

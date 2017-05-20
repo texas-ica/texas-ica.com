@@ -11,6 +11,7 @@ from ica.settings import (
 from ica.api.v1 import api
 from ica.views.website import website
 from ica.views.social import social
+from ica.views.management import management
 from ica.models.user import User
 from ica.cache import cache
 
@@ -38,6 +39,7 @@ app.config.from_object(config)
 # Register apps
 app.register_blueprint(website)
 app.register_blueprint(social, url_prefix='/social')
+app.register_blueprint(management, url_prefix='/management')
 app.register_blueprint(api, url_prefix='/api/v1')
 
 # Database settings

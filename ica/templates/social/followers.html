@@ -7,14 +7,14 @@
 
 {% block content %}
 <div class="ui middle aligned divided list">
-    {% if followers|length > 0 %}
+    {% if followers %}
     {% for follower in followers %}
     <div class="item">
         <div class="right floated content">
             {% if user.is_following(follower) %}
-            <a class="ui basic red button" href="{{ 'unfollow/' + follower.email }}">Unfollow</a>
+            <a class="ui basic red button" href="{{ 'unfollow/' ~ follower.id }}">Unfollow</a>
             {% else %}
-            <a class="ui basic green button" href="{{ 'follow/' + follower.email }}">Follow</a>
+            <a class="ui basic green button" href="{{ 'follow/' ~ follower.id }}">Follow</a>
             {% endif %}
         </div>
         <img class="ui mini rounded middle aligned image" src="{{ url_for('static', filename=follower.get_pfpic()) }}">

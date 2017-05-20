@@ -14,6 +14,7 @@
     </div>
 </form>
 
+{% if members %}
 <div class="ui four column stackable grid">
     {% for member in members %}
     <div class="column">
@@ -27,16 +28,13 @@
                     <span class="date">{{ member.followers|length }} followers</span>
                 </div>
                 <div class="description">
-                    <p>
-                        {{ member.major }}<br>
-                        {{ member.hometown }}
-                    </p>
+                    <p>{{ member.year }}<br>{{ member.hometown }}</p>
                 </div>
                 <div class="extra content">
                     {% if user.is_following(member) %}
-                    <a class="ui basic red button" href="{{ 'unfollow/' + member.email }}">Unfollow</a>
+                    <a class="ui basic red button" href="{{ 'unfollow/' ~ member.id }}">Unfollow</a>
                     {% else %}
-                    <a class="ui basic green button" href="{{ 'follow/' + member.email }}">Follow</a>
+                    <a class="ui basic green button" href="{{ 'follow/' ~ member.id }}">Follow</a>
                     {% endif %}
                 </div>
             </div>
@@ -44,4 +42,5 @@
     </div>
     {% endfor %}
 </div>
+{% endif %}
 {% endblock %}

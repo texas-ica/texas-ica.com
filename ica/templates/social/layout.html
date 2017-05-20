@@ -61,7 +61,14 @@
             {% block nav_members %}<a class="item" href="{{ url_for('social.members') }}">Members</a>{% endblock %}
             {% block nav_leaderboard %}<a class="item" href="{{ url_for('social.leaderboard') }}">Leaderboard</a>{% endblock %}
             {% block nav_followers %}<a class="item" href="{{ url_for('social.followers') }}">Followers</a>{% endblock %}
-            {% block nav_settings %}<a class="item" href="{{ url_for('social.settings') }}">Settings</a>{% endblock %}
+            {% if user.board_member %}
+            <div id="nav-apps" class="ui dropdown item">
+                Apps <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item" href="{{ url_for('management.index') }}">Management</a>
+                </div>
+            </div>
+            {% endif %}
         </div>
         {% block content %}{% endblock %}
     </div>
