@@ -1,0 +1,16 @@
+@import 'colors';
+
+body {
+    background-color: $transparent-gray;
+}
+
+.ui.button {
+    background-color: $medium-aquamarine;
+    color: $white;
+    transition: all 0.1s linear;
+}
+
+.ui.button:hover {
+    background-color: $dark-aquamarine;
+    color: $white;
+}

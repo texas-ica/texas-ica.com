@@ -1,0 +1,44 @@
+@import 'colors';
+@import 'base';
+
+.ui.positive.message {
+    margin: 2% 0%;
+}
+
+.ui.negative.message {
+    margin: 2% 0%;
+}
+
+#title {
+    margin: 3%;
+}
+
+#apps {
+    padding: 2%;
+
+    a {
+        color: $steel-blue;
+        transition: all 0.1s linear;
+    }
+
+    a:hover {
+        color: $dark-steel-blue;
+    }
+
+    p {
+        color: $medium-gray;
+    }
+}
+
+.ui.breadcrumb {
+    padding: 2% 0%;
+
+    a {
+        color: $steel-blue;
+        transition: all 0.1s linear;
+    }
+
+    a:hover {
+        color: $dark-steel-blue;
+    }
+}

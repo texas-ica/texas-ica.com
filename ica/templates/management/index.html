@@ -3,13 +3,12 @@
 {% block title %}ICA - Management{% endblock %}
 
 {% block content %}
-
-<h1 class="ui center aligned header">
+<h1 id="title" class="ui center aligned header">
     Management
     <div class="sub header">Administration dashboard for ICA board members</div>
 </h1>
 
-<div class="ui container">
+<div id="apps" class="ui container">
     <div class="ui left aligned stackable three column grid">
         <div class="column">
             <h3 class="ui center aligned icon header">
@@ -30,21 +29,21 @@
                 <i class="add to calendar icon"></i>
                 <a href="{{ url_for('management.events') }}">Events</a>
             </h3>
-            <p>Create an event for the social network dashboard</p>
+            <p>Create a public event for the social network</p>
         </div>
         <div class="column">
             <h3 class="ui center aligned icon header">
                 <i class="announcement icon"></i>
                 <a href="{{ url_for('management.announcements') }}">Announcements</a>
             </h3>
-            <p>Create an announcement for the social network dashboard</p>
+            <p>Create an announcement for the social network</p>
         </div>
         <div class="column">
             <h3 class="ui center aligned icon header">
                 <i class="tasks icon"></i>
                 Log
             </h3>
-            <p>Log of various events around the website, database, and API</p>
+            <p>Log of events around the website, database, and API</p>
         </div>
         <div class="column">
             <h3 class="ui center aligned icon header">
@@ -55,5 +54,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

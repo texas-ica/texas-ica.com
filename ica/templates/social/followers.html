@@ -3,18 +3,18 @@
 
 {% block nav_followers %}<a class="active item" href="{{ url_for('social.followers') }}">Followers</a>{% endblock %}
 
-{% block title %}ICA - Social{% endblock %}
+{% block title %}ICA - Followers{% endblock %}
 
 {% block content %}
-<div class="ui middle aligned divided list">
+<div id="followers" class="ui middle aligned divided list">
     {% if followers %}
     {% for follower in followers %}
     <div class="item">
         <div class="right floated content">
             {% if user.is_following(follower) %}
-            <a class="ui basic red button" href="{{ 'unfollow/' ~ follower.id }}">Unfollow</a>
+            <a class="ui basic tiny red button" href="{{ 'unfollow/' ~ follower.id }}">Unfollow</a>
             {% else %}
-            <a class="ui basic green button" href="{{ 'follow/' ~ follower.id }}">Follow</a>
+            <a class="ui basic tiny green button" href="{{ 'follow/' ~ follower.id }}">Follow</a>
             {% endif %}
         </div>
         <img class="ui mini rounded middle aligned image" src="{{ url_for('static', filename=follower.get_pfpic()) }}">

@@ -1,0 +1,72 @@
+@import 'colors';
+@import 'base';
+
+.header {
+    color: $black;
+}
+
+#menu {
+    .active.item {
+        color: $steel-blue;
+        border-color: $steel-blue;
+    }
+}
+
+#profile {
+    margin-top: 1%;
+
+    p {
+        color: $medium-gray;
+    }
+
+    .tiny.label {
+        background-color: $medium-aquamarine;
+        color: $white;
+    }
+}
+
+#announcements {
+    padding: 3%;
+    background-color: $white;
+    border: 1px solid $light-gray;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px #EDEDED;
+
+    p {
+        color: $medium-gray;
+    }
+
+    .user {
+        color: $black;
+    }
+
+    .extra.text {
+        color: $medium-gray;
+    }
+}
+
+#events {
+    .content .meta {
+        padding-bottom: 1%;
+    }
+}
+
+#search {
+    padding: 1%;
+
+    input {
+        margin-right: 3%;
+    }
+}
+
+#members {
+    .description p {
+        margin: 5% 0%;
+    }
+}
+
+#followers {
+    .item {
+        padding: 1% 0%;
+    }
+}

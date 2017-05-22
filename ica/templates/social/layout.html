@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/social.css') }}">
+{% endblock %}
+
 {% block app %}
 <!-- Profile and Subnavigation -->
-<div class="ui centered stackable grid">
+<div id="profile" class="ui centered stackable grid">
     <div class="three wide column">
         <div class="ui left aligned container">
             <img class="ui centered fluid rounded image" src="{{ url_for('static', filename=user.get_pfpic()) }}">
@@ -36,26 +40,26 @@
                 {% endif %}
             </div>
 
-            <a class="ui tiny red label">{{ user.points }} Points</a>
+            <a class="ui tiny label">{{ user.points }} Points</a>
             {% if user.board_member %}
-                <a class="ui tiny orange label">Board Member</a>
+                <a class="ui tiny label">Board Member</a>
             {% endif %}
             {% if user.spotlight %}
-                <a class="ui tiny yellow label">Member of the Week</a>
+                <a class="ui tiny label">Member of the Week</a>
             {% endif %}
             {% if user.social_comm %}
-                <a class="ui tiny green label">Social Committee</a>
+                <a class="ui tiny label">Social Committee</a>
             {% endif %}
             {% if user.service_comm %}
-                <a class="ui tiny blue label">Service Committee</a>
+                <a class="ui tiny label">Service Committee</a>
             {% endif %}
             {% if user.is_top_member(10) %}
-                <a class="ui tiny violet label">Top Member</a>
+                <a class="ui tiny label">Top Member</a>
             {% endif %}
         </div>
 
     </div>
-    <div class="ten wide column">
+    <div id="menu" class="ten wide column">
         <div class="ui secondary pointing stackable menu">
             {% block nav_overview %}<a class="item" href="{{ url_for('social.index') }}">Overview</a>{% endblock %}
             {% block nav_members %}<a class="item" href="{{ url_for('social.members') }}">Members</a>{% endblock %}
