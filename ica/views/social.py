@@ -81,7 +81,7 @@ def leaderboard():
 @social.route('/followers', methods=['GET'])
 @login_required
 def followers():
-    fields = ['fname', 'lname', 'year', 'email']
+    fields = ['fname', 'lname', 'year', 'email', 'pfpic_url']
     followers = User.objects(following=current_user.id).only(
         *fields
     ).order_by('fname')

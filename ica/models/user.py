@@ -126,6 +126,7 @@ class User(Document, UserMixin):
 
     def to_dict(self, extended=False):
         info = {
+            'id': str(self.id),
             'fname': self.fname,
             'lname': self.lname,
             'email': self.email,
@@ -135,6 +136,11 @@ class User(Document, UserMixin):
         }
 
         if extended:
+            followers = ['{} {}'.format(user.fname, user.lname) for
+                         user in self.followers]
+            following = ['{} {}'.format(user.fname, user.lname) for
+                         user in self.following]
+
             info.update({
                 'points': self.points,
                 'bio': self.bio,
@@ -146,8 +152,8 @@ class User(Document, UserMixin):
                 'service_comm': self.social_comm,
                 'spotlight': self.spotlight,
                 'pfpic_url': self.pfpic_url,
-                'followers': self.followers,
-                'following': self.following
+                'followers': followers,
+                'following': following
             })
 
         return info

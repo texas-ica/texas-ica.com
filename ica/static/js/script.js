@@ -15,7 +15,4 @@
             $(modal_id).modal('show');
         });
     }
-
-    // event datepicker
-    //$('#event-datepicker').datepicker();
 })(jQuery);

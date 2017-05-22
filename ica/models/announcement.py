@@ -33,8 +33,10 @@ class Announcement(Document):
         )
 
     def to_dict(self):
+        author = '{} {}'.format(self.author.fname, self.author.lname)
+
         return {
-            'author': self.author,
+            'author': author,
             'message': self.message,
-            'likes': self.likes
+            'likes': str(self.likes)
         }

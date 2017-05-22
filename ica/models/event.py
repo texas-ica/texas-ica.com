@@ -39,13 +39,16 @@ class Event(Document):
         return 'Event<{}>'.format(self.name)
 
     def to_dict(self):
+        author = self.author.to_dict()
+        attended = [user.to_dict() for user in self.attended]
+
         return {
             'name': self.name,
             'datetime': self.datetime,
             'location': self.location,
             'description': self.description,
-            'pts': self.pts,
+            'pts': str(self.pts),
             'fb_link': self.fb_link,
-            'author': self.author,
-            'attended': self.attended
+            'author': author,
+            'attended': attended
         }
