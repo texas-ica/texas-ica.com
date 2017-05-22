@@ -28,9 +28,12 @@ The configuration file requires a couple of environment variables required to bu
 
 ## Directory Structure
 
-The technology stack is primarily Flask, MongoDB (main database), Redis (task queue broker), Backbone.js, and Semantic UI. There are many other frameworks used to make handling server and API requests easier. The following list should give a good intuition as to how the codebase is organized.
+The technology stack is primarily Flask, MongoDB (main database), Redis (caching and task queue), Backbone.js, and Semantic UI. There are many other frameworks used to make handling server and API requests easier. The following list should give a good intuition as to how the codebase is organized.
 
+- `ica/api`: Public API used for client-side AJAX and rendering
+- `ica/data`: Structured data (JSON) used for website pages
 - `ica/models`: Database object schemas for MongoDB
+- `ica/scripts`: Useful scripts for testing and database management
 - `ica/static`: Static assets for the website
     - `ica/static/js`: Dynamic content - navigation dropdowns, modals, etc. - and Backbone.js MVC
     - `ica/static/scss`: CSS stylesheets written in SCSS
@@ -38,8 +41,13 @@ The technology stack is primarily Flask, MongoDB (main database), Redis (task qu
 - `ica/templates`: Website templates using the Jinja2 engine
 - `ica/tests`: Unit tests for different parts of the app
 - `ica/views`: Views for the main website, social network, and other apps
+- `cache.py`: Contains a global cache object
 - `forms.py`: Model and validation logic for forms
-- `server.py`: Configuration for the server, database and frameworks
+- `server.py`: Configuration for the server, database, and frameworks
+- `settings.py`: Different configuration options for production, development, and testing
+- `utils.py`: Misc algorithms and utility functions used throughout the app
+
+Note that the `css` files are not under version control. The stylesheets are written in [Sass](sass-lang.com), compiled into CSS, and stored in `static/css` (which is hidden by `.gitignore`). We use [Koala](koala-app.com) to compile stylesheets from `.scss` to `.css`, so download this app if you would like to edit the stylesheets.
 
 ## Version Control
 
