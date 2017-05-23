@@ -1,10 +1,12 @@
 import os
 import json
 import uuid
+import heapq
 
 from PIL import Image, ImageOps
 
 from ica.models.user import User
+from ica.cache import cache
 
 
 def get_file_extension(filename):
@@ -39,20 +41,65 @@ def jsonify_response(resp):
     return json.loads(resp_string)
 
 
-def get_recommended_users(user, limit=6):
+@cache.memoize(timeout=60 * 60)
+def get_recommended_users(user, limit=4):
     """
-    Algorithm that returns a list of up to six users
+    Algorithm that returns a list of up to four users
     that the current user is recommended to follow
     based on personal profile settings.
     """
 
-    year = user.year
-    # major = user.major
-    # following = user.following
+    fields = ['followers', 'following', 'major', 'year',
+              'hometown', 'fname', 'lname']
+    user = User.objects(id=user.id).only(*fields).first()
 
-    users = User.objects(year=year)
+    recommended = []
+    following = user.following
 
-    return users[:limit]
+    # Create set of all followings the current user's
+    # followings have. Take union of those sets with working
+    # set to populate it.
+    pool = set()
+    for friend in following:
+        friend_follows = set(friend.following)
+        pool = pool.union(friend_follows)
+
+    if not pool:
+        return None
+
+    # Remove current user from the set
+    pool.discard(user)
+
+    # Initialize weights for each user
+    pool = list(pool)
+    friends = {friend:1.0 for friend in pool}
+
+    # Assign weights based on matches with user
+    for friend in friends:
+        # Has mutual friend
+        friend_follows = set(friend.following)
+        my_follows = set(user.following)
+        if friend_follows.intersection(my_follows):
+            friends[friend] *= 0.5
+
+        # Has same major
+        if friend.major == user.major:
+            friends[friend] *= 0.2
+
+        # Has same year
+        if friend.year == user.year:
+            friends[friend] *= 0.2
+
+        # Has same hometown
+        if friend.hometown == user.hometown:
+            friends[friend] *= 0.1
+
+    recommended = [(friend, friends[friend])
+                   for friend in friends]
+    recommended = sorted(recommended, key=lambda x: x[1])
+    recommended = [friend for (friend, weight) in recommended]
+
+    return recommended[:limit]
 
 
 def resize_image(upload_folder, filename):

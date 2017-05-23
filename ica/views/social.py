@@ -9,7 +9,8 @@ from ica.models.announcement import Announcement
 from ica.models.event import Event
 from ica.forms import ProfileForm, SearchForm
 from ica.utils import (
-    get_file_extension, allowed_filename, generate_token, resize_image
+    get_file_extension, allowed_filename, generate_token, resize_image,
+    get_recommended_users
 )
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
@@ -50,17 +51,18 @@ def index():
 @login_required
 def members():
     member_set = None
+    recommended = get_recommended_users(current_user)
     search_form = SearchForm(request.form)
     if request.method == 'POST' and search_form.validate():
         query = search_form.query.data
-        fields = ['fname', 'lname', 'followers', 'year',
-                  'hometown', 'pfpic_url']
+        fields = ['fname', 'lname', 'year', 'hometown', 'pfpic_url']
         member_set = User.objects.only(*fields).search_text(
             query
         ).order_by('fname').filter(id__ne=current_user.id)
     return render_template('social/members.html', **{
         'user': current_user,
         'search_form': search_form,
+        'recommended': recommended,
         'members': member_set
     })
 
