@@ -42,6 +42,8 @@ class TestingConfig(Config):
     TESTING = True
     DATABASE_NAME = 'testing'
     DATABASE_HOST = 'mongodb://127.0.0.1:27017'
+    DATABASE_USER = None
+    DATABASE_PASSWORD = None
     DEBUG_TB_PANELS = (
         'flask_debugtoolbar.panels.versions.VersionDebugPanel',
         'flask_debugtoolbar.panels.timer.TimerDebugPanel',

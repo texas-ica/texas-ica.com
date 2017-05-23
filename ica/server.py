@@ -1,5 +1,6 @@
 import mongoengine
 import argparse
+import os
 
 from flask import Flask
 from flask_login import LoginManager
@@ -15,26 +16,9 @@ from ica.views.management import management
 from ica.models.user import User
 from ica.cache import cache
 
-# Parse command line arguments
-parser = argparse.ArgumentParser()
-parser.add_argument('-t', '--testing', action='store_true', default=False,
-                    help='start server with test settings')
-parser.add_argument('-d', '--development', action='store_true', default=False,
-                    help='start server with development settings')
-parser.add_argument('-p', '--production', action='store_true', default=False,
-                    help='start server with production settigns')
-args = parser.parse_args()
-
-if args.production is True:
-    config = ProductionConfig
-elif args.development is True:
-    config = DevelopmentConfig
-else:
-    config = TestingConfig
-
 # Server settings
 app = Flask(__name__)
-app.config.from_object(config)
+app.config.from_object(os.getenv('CONFIG'))
 
 # Register apps
 app.register_blueprint(website)
@@ -44,15 +28,11 @@ app.register_blueprint(api, url_prefix='/api/v1')
 
 # Database settings
 db_auth = {
-    'db': config.DATABASE_NAME,
-    'host': config.DATABASE_HOST
+    'db': app.config['DATABASE_NAME'],
+    'host': app.config['DATABASE_HOST'],
+    'username': app.config['DATABASE_USER'],
+    'password': app.config['DATABASE_PASSWORD']
 }
-
-if config is DevelopmentConfig or config is ProductionConfig:
-    db_auth.update({
-        'username': config.DATABASE_USER,
-        'password': config.DATABASE_PASSWORD
-    })
 
 mongoengine.connect(**db_auth)
 
