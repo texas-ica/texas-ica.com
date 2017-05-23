@@ -48,13 +48,22 @@ a:hover {
     border-bottom: 1px solid $light-gray;
 
     a.item {
+        font-family: "Roboto", sans-serif;
         border-left: none;
         border-right: none;
     }
+}
+
+.right.menu {
+    font-family: "Roboto", sans-serif;
 }
 
 .ui.footer {
     padding: 2% 0%;
     background-color: $white;
     box-shadow: 0px 500px 0px 500px $white;
+
+    p {
+        font-size: 14px;
+    }
 }

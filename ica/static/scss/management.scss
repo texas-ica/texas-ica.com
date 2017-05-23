@@ -10,11 +10,13 @@
 }
 
 #title {
+    font-family: "Roboto", sans-serif;
     margin: 3%;
 }
 
 #apps {
     padding: 2%;
+    font-family: "Roboto", sans-serif;
 
     a {
         color: $vivid-cerulean;
@@ -27,6 +29,10 @@
 
     p {
         color: $medium-gray;
+    }
+
+    h3 {
+        font-family: inherit;
     }
 }
 

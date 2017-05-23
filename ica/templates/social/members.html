@@ -5,6 +5,36 @@
 {% block title %}ICA - Members{% endblock %}
 
 {% block content %}
+<h3>Recommended to Follow</h3>
+{% if recommended %}
+<div id="recommended" class="ui four column stackable doubling grid">
+    {% for member in recommended %}
+    <div class="column">
+        <div class="ui card">
+            <div class="image">
+                <img src="{{ url_for('static', filename=member.get_pfpic()) }}">
+            </div>
+            <div class="content">
+                <a class="header">{{ member.fname }} {{ member.lname }}</a>
+                <div class="description">
+                    <p>{{ member.year }}<br>{{ member.hometown }}</p>
+                </div>
+                <div class="extra content">
+                    {% if user.is_following(member) %}
+                    <a class="ui basic tiny red button" href="{{ 'unfollow/' ~ member.id }}">Unfollow</a>
+                    {% else %}
+                    <a class="ui basic tiny green button" href="{{ 'follow/' ~ member.id }}">Follow</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>Follow some members to get suggestions!</p>
+{% endif %}
+
 <h3>Search for users</h3>
 <form id="search" class="ui form" action="{{ url_for('social.members') }}" method="POST">
     {{ search_form.csrf_token }}
@@ -24,9 +54,6 @@
             </div>
             <div class="content">
                 <a class="header">{{ member.fname }} {{ member.lname }}</a>
-                <div class="meta">
-                    <span class="date">{{ member.followers|length }} followers</span>
-                </div>
                 <div class="description">
                     <p>{{ member.year }}<br>{{ member.hometown }}</p>
                 </div>

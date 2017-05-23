@@ -5,6 +5,11 @@
     color: $black;
 }
 
+.ui.card > .content > .header:not(.ui) {
+    font-family: inherit;
+    font-weight: 400;
+}
+
 #menu {
     padding: none;
     background: none;
@@ -25,6 +30,10 @@
 
 #profile {
     margin-top: 1%;
+
+    h1, h3 {
+        font-family: inherit;
+    }
 
     p {
         color: $medium-gray;
@@ -47,6 +56,10 @@
         color: $medium-gray;
     }
 
+    a {
+        font-weight: 400;
+    }
+
     .user {
         color: $black;
     }
@@ -57,6 +70,10 @@
 }
 
 #events {
+    .content .header {
+        font-family: inherit;
+    }
+
     .content .meta {
         padding-bottom: 1%;
     }
@@ -70,13 +87,29 @@
     }
 }
 
+#recommended {
+    .description p {
+        margin: 5% 0%;
+    }
+}
+
 #members {
     .description p {
         margin: 5% 0%;
     }
 }
 
+#leaderboard {
+    .content {
+        font-weight: 400;
+    }
+}
+
 #followers {
+    h4 {
+        font-weight: 400;
+    }
+
     .item {
         padding: 1% 0%;
     }
