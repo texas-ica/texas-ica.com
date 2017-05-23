@@ -1,17 +1,12 @@
 {% extends "website/layout.html" %}
+{% from "website/macros.html" import render_header %}
 
 {% block title %}ICA - Board{% endblock %}
 {% block nav_board %}<a class="active item" href="{{ url_for('website.board') }}">Board</a>{% endblock %}
 
-{% block header %}
-<div class="ui left aligned container">
-    <h1 class="ui header">Board</h1>
-    <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.</h2>
-</div>
-{% endblock %}
-
 {% block content %}
-<div class="ui container">
+<div id="board" class="ui container">
+    {{ render_header('ICA Board', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim ac justo non vestibulum. Pellentesque mauris sem, suscipit eu erat nec, aliquet congue erat.') }}
     <div class="ui four column stackable grid">
         {% for key, value in data %}
         <div class="column">

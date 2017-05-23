@@ -1,20 +1,25 @@
 {% extends "website/layout.html" %}
+{% from "website/macros.html" import render_header %}
 
 {% block title %}ICA - Blog{% endblock %}
 {% block nav_blog %}<a class=" active item" href="{{ url_for('website.blog') }}">Blog</a>{% endblock %}
 
-{% block header %}
-<div class="ui left aligned container">
-    <h1 class="ui header">Blog</h1>
-    <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.</h2>
-</div>
-{% endblock %}
-
 {% block content %}
-<div class="ui text container">
-    <div class="ui vertical segment">
-        <h1>Blog Post #1</h1>
-        <h2>ICA Member // March 29, 2017</h2>
+<div id="blog" class="ui text container">
+    {{ render_header('ICA Blog', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim ac justo non vestibulum. Pellentesque mauris sem, suscipit eu erat nec, aliquet congue erat.') }}
+    <div class="ui vertical segment post">
+        <h2 class="ui header">
+            Blog Post #2
+            <div class="sub header">ICA Member // May 22, 2017</div>
+        </h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim ac justo non vestibulum. Pellentesque mauris sem, suscipit eu erat nec, aliquet congue erat. Donec cursus ipsum at sapien volutpat pretium. Sed felis magna, placerat id congue a, dapibus ut velit. Maecenas maximus lacus odio. Pellentesque rhoncus lacus scelerisque lacinia dapibus. Proin a ante nulla.</p>
+        <p>Vestibulum dignissim ex in ligula lacinia malesuada. Vestibulum semper felis vitae lobortis malesuada. Nunc auctor nisi in nisi posuere, non pretium elit tempor. Vestibulum pharetra eu augue non aliquet. In tincidunt facilisis ultrices. Duis non dignissim ligula. Vestibulum ac leo quis risus faucibus scelerisque. Duis ornare nulla in pharetra euismod. Nullam sodales est quis mi placerat, eget posuere neque ultricies. Cras commodo tempus lorem. Fusce quam augue, porta non nunc ullamcorper, feugiat auctor erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam posuere varius eleifend. In hac habitasse platea dictumst.</p>
+    </div>
+    <div class="ui vertical segment post">
+        <h2 class="ui header">
+            Blog Post #1
+            <div class="sub header">ICA Member // March 29, 2017</div>
+        </h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim ac justo non vestibulum. Pellentesque mauris sem, suscipit eu erat nec, aliquet congue erat. Donec cursus ipsum at sapien volutpat pretium. Sed felis magna, placerat id congue a, dapibus ut velit. Maecenas maximus lacus odio. Pellentesque rhoncus lacus scelerisque lacinia dapibus. Proin a ante nulla.</p>
         <p>Vestibulum dignissim ex in ligula lacinia malesuada. Vestibulum semper felis vitae lobortis malesuada. Nunc auctor nisi in nisi posuere, non pretium elit tempor. Vestibulum pharetra eu augue non aliquet. In tincidunt facilisis ultrices. Duis non dignissim ligula. Vestibulum ac leo quis risus faucibus scelerisque. Duis ornare nulla in pharetra euismod. Nullam sodales est quis mi placerat, eget posuere neque ultricies. Cras commodo tempus lorem. Fusce quam augue, porta non nunc ullamcorper, feugiat auctor erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam posuere varius eleifend. In hac habitasse platea dictumst.</p>
     </div>

@@ -5,79 +5,64 @@
 {% block nav_home %}<a class="active item">Home</a>{% endblock %}
 
 {% block header %}
-<div class="ui center aligned container">
+<div id="banner" class="ui center aligned text container">
+    <img id="logo" class="ui small circular centered image" src="{{ url_for('static', filename='img/filler.jpg') }}">
     <h1 class="ui header">Indian Cultural Association</h1>
-    <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.</h2>
-    <div class="ui huge primary button">
-        Learn More
-    </div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.</p>
 </div>
 {% endblock %}
 
 {% block content %}
-<div class="ui divider"></div>
-
-<div class="ui vertical segment">
+<div id="about" class="ui vertical segment">
     <div class="ui container">
-        {{ render_header('About Us', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur accumsan nulla velit, ac maximus arcu vulputate tincidunt. Ut maximus elit quis tempor dictum. Duis ornare ac arcu nec varius.') }}
-
+        {{ render_header('About Us', 'ICA is an organization that creates, innovates, and introduces current topics in India to captivate and educate our audience everywhere. We are an organization that people fit into, changes a community into a family, and brings India to Austin.') }}
         <div class="ui center aligned stackable three column grid">
             <div class="row">
                 {{ render_about('Culture', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
-
                 {{ render_about ('Compassion', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
-
                 {{ render_about('Camaradarie', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
             </div>
         </div>
     </div>
 </div>
 
-<div class="ui vertical segment">
+<div id="join" class="ui vertical segment">
     <div class="ui container">
         {{ render_header('Join Us', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur accumsan nulla velit, ac maximus arcu vulputate tincidunt. Ut maximus elit quis tempor dictum. Duis ornare ac arcu nec varius.') }}
-
         <div class="ui center aligned stackable three column grid">
             <div class="row">
-                {{ render_join('Apparel', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
-
-                {{ render_join('Discounts', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
-
-                {{ render_join('Food & Drinks', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
-
-                {{ render_join('Socials', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
-
-                {{ render_join('Academics', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
-
-                {{ render_join('Career', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
+                {{ render_join('Apparel', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/shirt.png') }}
+                {{ render_join('Discounts', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/coin.png') }}
+                {{ render_join('Food & Drinks', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/coffee.png') }}
+            </div>
+            <div class="row">
+                {{ render_join('Socials', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/friends.png') }}
+                {{ render_join('Academics', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/gears.png') }}
+                {{ render_join('Career', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/work.png') }}
             </div>
         </div>
     </div>
 </div>
 
-<div class="ui vertical segment">
+<div id="events" class="ui vertical segment">
     <div class="ui container">
         {{ render_header('Our Events', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur accumsan nulla velit, ac maximus arcu vulputate tincidunt. Ut maximus elit quis tempor dictum. Duis ornare ac arcu nec varius.') }}
-
         <div class="ui center aligned stackable three column grid">
             <div class="row">
                 {{ render_event('Jhalak', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
-
                 {{ render_event('Rasoi', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
-
                 {{ render_event('Study Hours', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
-
+            </div>
+            <div class="row">
                 {{ render_event('Trivia Night', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
-
                 {{ render_event('Bollywood Movie Night', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
-
                 {{ render_event('Game Day', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'img/filler.jpg') }}
             </div>
         </div>
     </div>
 </div>
 
-<div class="ui vertical segment">
+<div id="contact" class="ui vertical segment">
     <div class="ui container">
         <div class="ui center aligned text container">
             <h1>Contact Us</h1>

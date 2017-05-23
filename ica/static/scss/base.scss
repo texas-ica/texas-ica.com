@@ -1,7 +1,20 @@
 @import 'colors';
 
+* {
+    font-family: "Roboto", sans-serif;
+}
+
 body {
     background-color: $transparent-gray;
+}
+
+a {
+    color: $vivid-cerulean;
+    transition: all 0.1s linear;
+}
+
+a:hover {
+    color: $dark-vivid-cerulean;
 }
 
 .ui.button {
@@ -13,4 +26,35 @@ body {
 .ui.button:hover {
     background-color: $dark-aquamarine;
     color: $white;
+}
+
+.ui.primary.button {
+    background-color: $medium-aquamarine;
+    color: $white;
+    transition: all 0.1s linear;
+}
+
+.ui.primary.button:hover {
+    background-color: $dark-aquamarine;
+    color: $white;
+}
+
+#nav {
+    border-radius: 0;
+    box-shadow: none;
+    padding: 1% 5%;
+    background: $white;
+    border: 1px solid $white;
+    border-bottom: 1px solid $light-gray;
+
+    a.item {
+        border-left: none;
+        border-right: none;
+    }
+}
+
+.ui.footer {
+    padding: 2% 0%;
+    background-color: $white;
+    box-shadow: 0px 500px 0px 500px $white;
 }

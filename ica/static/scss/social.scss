@@ -6,9 +6,20 @@
 }
 
 #menu {
+    padding: none;
+    background: none;
+
     .active.item {
-        color: $steel-blue;
-        border-color: $steel-blue;
+        font-weight: normal;
+        border-color: $medium-aquamarine;
+    }
+
+    a {
+        transition: all 0.1s linear;
+    }
+
+    a:hover {
+        border-color: $medium-aquamarine;
     }
 }
 
@@ -69,4 +80,8 @@
     .item {
         padding: 1% 0%;
     }
+}
+
+.ui.footer {
+    margin-top: 2%;
 }

@@ -1,20 +1,13 @@
 {% extends "website/layout.html" %}
-{% from "website/macros.html" import render_faq %}
+{% from "website/macros.html" import render_header, render_faq %}
 
 {% block title %}ICA - FAQ{% endblock %}
 {% block nav_faq %}<a class=" active item" href="{{ url_for('website.faq') }}">FAQ</a>{% endblock %}
 
-{% block header %}
-<div class="ui left aligned container">
-    <h1 class="ui header">FAQ</h1>
-    <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.</h2>
-</div>
-{% endblock %}
-
 {% block content %}
-<div class="ui text container">
+<div id="faq" class="ui text container">
+    {{ render_header('ICA Board', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim ac justo non vestibulum. Pellentesque mauris sem, suscipit eu erat nec, aliquet congue erat.') }}
     {{ render_faq('How much does ICA cost?', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim ac justo non vestibulum. Pellentesque mauris sem, suscipit eu erat nec, aliquet congue erat. Donec cursus ipsum at sapien volutpat pretium. Sed felis magna, placerat id congue a, dapibus ut velit. Maecenas maximus lacus odio. Pellentesque rhoncus lacus scelerisque lacinia dapibus. Proin a ante nulla.') }}
-
     {{ render_faq('What events does ICA have?', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim ac justo non vestibulum. Pellentesque mauris sem, suscipit eu erat nec, aliquet congue erat. Donec cursus ipsum at sapien volutpat pretium. Sed felis magna, placerat id congue a, dapibus ut velit. Maecenas maximus lacus odio. Pellentesque rhoncus lacus scelerisque lacinia dapibus. Proin a ante nulla.') }}
 </div>
 {% endblock %}

@@ -17,12 +17,12 @@
     padding: 2%;
 
     a {
-        color: $steel-blue;
+        color: $vivid-cerulean;
         transition: all 0.1s linear;
     }
 
     a:hover {
-        color: $dark-steel-blue;
+        color: $dark-vivid-cerulean;
     }
 
     p {
@@ -41,4 +41,8 @@
     a:hover {
         color: $dark-steel-blue;
     }
+}
+
+.ui.footer {
+    margin-top: 2%;
 }
