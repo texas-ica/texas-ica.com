@@ -1,6 +1,6 @@
 # Texas ICA
 
-[![Build Status](https://travis-ci.org/texas-ica/texas-ica.com.svg?branch=master)](https://travis-ci.org/texas-ica/texas-ica.com)
+[![Build Status](https://travis-ci.org/texas-ica/texas-ica.com.svg?branch=dev)](https://travis-ci.org/texas-ica/texas-ica.com)
 
 Connect with fellow members, view upcoming events/announcements, and use other custom apps!
 
