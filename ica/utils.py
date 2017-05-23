@@ -1,12 +1,25 @@
 import os
 import json
 import uuid
-import heapq
+from functools import wraps
 
 from PIL import Image, ImageOps
+from flask import current_app, url_for, redirect
+from flask_login import current_user
+from flask_login.config import EXEMPT_METHODS
 
 from ica.models.user import User
 from ica.cache import cache
+
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_view(*args, **kwargs):
+        if hasattr(current_user, 'board_member'):
+            if current_user.board_member:
+                return f(*args, **kwargs)
+        return redirect(url_for('social.index'))
+    return decorated_view
 
 
 def get_file_extension(filename):
@@ -72,7 +85,7 @@ def get_recommended_users(user, limit=4):
 
     # Initialize weights for each user
     pool = list(pool)
-    friends = {friend:1.0 for friend in pool}
+    friends = {friend: 1.0 for friend in pool}
 
     # Assign weights based on matches with user
     for friend in friends:

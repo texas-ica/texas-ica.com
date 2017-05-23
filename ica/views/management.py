@@ -8,6 +8,7 @@ from ica.models.user import User
 from ica.models.announcement import Announcement
 from ica.models.event import Event
 from ica.forms import DatabaseEditForm, AnnouncementForm, EventForm
+from ica.utils import admin_required
 
 management = Blueprint('management', __name__,
                        template_folder='management')
@@ -15,6 +16,7 @@ management = Blueprint('management', __name__,
 
 @management.route('/', methods=['GET'])
 @login_required
+@admin_required
 def index():
     return render_template('management/index.html', **{
         'user': current_user
@@ -23,6 +25,7 @@ def index():
 
 @management.route('/edit', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def edit():
     members = User.objects.only('fname', 'lname', 'year', 'pfpic_url')
     return render_template('management/edit.html', **{
@@ -33,6 +36,7 @@ def edit():
 
 @management.route('/edit_user/<string:user_id>', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def edit_user(user_id):
     try:
         focus = User.objects(id=user_id).first()
@@ -77,6 +81,7 @@ def edit_user(user_id):
 
 @management.route('/points', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def points():
     return render_template('management/points.html', **{
         'user': current_user
@@ -85,6 +90,7 @@ def points():
 
 @management.route('/announcements', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def announcements():
     fields = ['message', 'creation_date']
     msgs = Announcement.objects(author=current_user.id).only(
@@ -108,6 +114,7 @@ def announcements():
 
 @management.route('/events', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def events():
     fields = ['name', 'datetime', 'location', 'pts']
     events = Event.objects(author=current_user.id).only(
