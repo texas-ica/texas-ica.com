@@ -6,7 +6,8 @@ class Config(object):
     CSRF_TOKEN = os.getenv('CSRF_TOKEN')
     MAX_CONTENT_LENGTH = 0.5 * 1024 * 1024
     CACHE_TYPE = 'redis'
-    CACHE_REDIS_URL = os.getenv('REDIS_DATABASE_URL')
+    CACHE_REDIS_URL = os.getenv('REDISCLOUD_URL')
+    SLACK_API_KEY = os.getenv('SLACK_API_KEY')
 
 
 class ProductionConfig(Config):
@@ -15,16 +16,17 @@ class ProductionConfig(Config):
     DATABASE_NAME = 'production'
     DATABASE_USER = os.getenv('PROD_DATABASE_USER')
     DATABASE_PASSWORD = os.getenv('PROD_DATABASE_PASSWORD')
-    DATABASE_HOST = 'mongodb://ds125481.mlab.com:25481'
+    DATABASE_HOST = os.getenv('PROD_DATABASE_HOST')
 
 
 class DevelopmentConfig(Config):
     DEBUG = True
     TESTING = True
-    DATABASE_NAME = 'development'
+    DATABASE_NAME = 'heroku_b694ljx0'
     DATABASE_USER = os.getenv('DEV_DATABASE_USER')
     DATABASE_PASSWORD = os.getenv('DEV_DATABASE_PASSWORD')
-    DATABASE_HOST = 'mongodb://ds019471.mlab.com:19471'
+    DATABASE_HOST = os.getenv('DEV_DATABASE_HOST')
+    CACHE_REDIS_URL = os.getenv('DEV_REDISCLOUD_URL')
     DEBUG_TB_PANELS = (
         'flask_debugtoolbar.panels.versions.VersionDebugPanel',
         'flask_debugtoolbar.panels.timer.TimerDebugPanel',
