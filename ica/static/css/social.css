@@ -1,0 +1,188 @@
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: rgba(243, 243, 246, 0.1);
+}
+
+input {
+  font-family: inherit;
+}
+
+a {
+  color: #00A8E8;
+  transition: all 0.1s linear;
+}
+
+a:hover {
+  color: #007099;
+}
+
+.ui.button {
+  font-family: inherit;
+  background-color: #5DD39E;
+  color: #FFFFFF;
+  transition: all 0.1s linear;
+}
+
+.ui.button:hover {
+  background-color: #31A973;
+  color: #FFFFFF;
+}
+
+.ui.primary.button {
+  background-color: #5DD39E;
+  color: #FFFFFF;
+  transition: all 0.1s linear;
+}
+
+.ui.primary.button:hover {
+  background-color: #31A973;
+  color: #FFFFFF;
+}
+
+.ui.form {
+  font-family: inherit;
+}
+
+.ui.form input[type=text] {
+  font-family: inherit;
+}
+
+.ui.positive.message {
+  font-family: inherit;
+  margin: 2% 0%;
+}
+
+.ui.negative.message {
+  font-family: inherit;
+  margin: 2% 0%;
+}
+
+#nav {
+  border-radius: 0;
+  box-shadow: none;
+  padding: 1% 5%;
+  background: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-bottom: 1px solid #DBDBDB;
+}
+#nav a.item {
+  font-family: "Roboto", sans-serif;
+  border-left: none;
+  border-right: none;
+}
+
+.right.menu {
+  font-family: "Roboto", sans-serif;
+}
+
+.ui.footer {
+  padding: 2% 0%;
+  background-color: #FFFFFF;
+  box-shadow: 0px 500px 0px 500px #FFFFFF;
+}
+.ui.footer p {
+  font-size: 14px;
+}
+
+.header {
+  color: #000000;
+}
+
+.ui.card > .content > .header:not(.ui) {
+  font-family: inherit;
+  font-weight: 400;
+}
+
+#menu {
+  padding: none;
+  background: none;
+}
+#menu .active.item {
+  font-weight: normal;
+  border-color: #5DD39E;
+}
+#menu a {
+  transition: all 0.1s linear;
+}
+#menu a:hover {
+  border-color: #5DD39E;
+}
+
+#profile {
+  margin-top: 1%;
+}
+#profile h1, #profile h3 {
+  font-family: inherit;
+}
+#profile p {
+  color: #6A737D;
+}
+#profile .tiny.label {
+  background-color: #5DD39E;
+  color: #FFFFFF;
+}
+
+#announcements {
+  padding: 3%;
+  background-color: #FFFFFF;
+  border: 1px solid #DBDBDB;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #EDEDED;
+}
+#announcements p {
+  color: #6A737D;
+}
+#announcements a {
+  font-weight: 400;
+}
+#announcements .user {
+  color: #000000;
+}
+#announcements .extra.text {
+  color: #6A737D;
+}
+
+#events .content .header {
+  font-family: inherit;
+}
+#events .content .meta {
+  padding-bottom: 1%;
+}
+
+#search {
+  padding: 1%;
+}
+#search input {
+  margin-right: 3%;
+}
+
+#recommended .description p {
+  margin: 5% 0%;
+}
+
+#members .description p {
+  margin: 5% 0%;
+}
+
+#leaderboard .content {
+  font-weight: 400;
+}
+
+#followers h4 {
+  font-family: inherit;
+  font-weight: 400;
+}
+#followers .item {
+  padding: 1% 0%;
+}
+
+.ui.footer {
+  margin-top: 2%;
+}
+
+#upload input {
+  margin: 5% 0%;
+}

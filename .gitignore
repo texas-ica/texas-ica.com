@@ -9,8 +9,8 @@ venv/
 # User images
 ica/static/tmp/
 
-# Build
-ica/static/css/
-
 # Extra
 ica/scripts/data
+
+# Log
+ica/logger/ica.log
