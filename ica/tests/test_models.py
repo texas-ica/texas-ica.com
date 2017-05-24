@@ -104,6 +104,7 @@ class TestUser(TestCase):
 
     def test_to_dict(self):
         exp_dict = {
+            'id': '5924e4c4ac30d58629c8c667',
             'fname': 'Blanch',
             'lname': 'Lando',
             'email': 'blanch@test.com',

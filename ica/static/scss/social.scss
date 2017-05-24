@@ -107,6 +107,7 @@
 
 #followers {
     h4 {
+        font-family: inherit;
         font-weight: 400;
     }
 
@@ -117,4 +118,10 @@
 
 .ui.footer {
     margin-top: 2%;
+}
+
+#upload {
+    input {
+        margin: 5% 0%;
+    }
 }

@@ -41,7 +41,7 @@
         <div class="six wide column">
             <h3>Profile picture</h3>
             <img class="ui small rounded image" src="{{ url_for('static', filename=user.get_pfpic()) }}">
-            <form action="{{ url_for('social.upload_pfpic') }}" method="POST" enctype="multipart/form-data">
+            <form id="upload" action="{{ url_for('social.upload_pfpic') }}" method="POST" enctype="multipart/form-data">
                 <input type="file" name="file"><br>
                 <button class="ui button" type="submit">Upload New Picture</button>
             </form>

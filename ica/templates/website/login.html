@@ -4,8 +4,7 @@
 {% block title %}ICA{% endblock %}
 
 {% block content %}
-<div class="ui text container">
-    <h1>Login to ICA Social</h1>
+<div id="login" class="ui text container">
     <form class="ui form error" action="{{ url_for('website.login') }}" method="POST">
         {{ form.csrf_token }}
         {{ render_field(form.email) }}

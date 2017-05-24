@@ -8,6 +8,10 @@ body {
     background-color: $transparent-gray;
 }
 
+input {
+    font-family: inherit;
+}
+
 a {
     color: $vivid-cerulean;
     transition: all 0.1s linear;
@@ -18,6 +22,7 @@ a:hover {
 }
 
 .ui.button {
+    font-family: inherit;
     background-color: $medium-aquamarine;
     color: $white;
     transition: all 0.1s linear;
@@ -37,6 +42,24 @@ a:hover {
 .ui.primary.button:hover {
     background-color: $dark-aquamarine;
     color: $white;
+}
+
+.ui.form {
+    font-family: inherit;
+}
+
+.ui.form input[type=text] {
+    font-family: inherit;
+}
+
+.ui.positive.message {
+    font-family: inherit;
+    margin: 2% 0%;
+}
+
+.ui.negative.message {
+    font-family: inherit;
+    margin: 2% 0%;
 }
 
 #nav {

@@ -4,9 +4,8 @@ import uuid
 from functools import wraps
 
 from PIL import Image, ImageOps
-from flask import current_app, url_for, redirect
+from flask import url_for, redirect
 from flask_login import current_user
-from flask_login.config import EXEMPT_METHODS
 
 from ica.models.user import User
 from ica.cache import cache
