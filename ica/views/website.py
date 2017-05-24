@@ -6,6 +6,7 @@ from flask_login import login_user, logout_user, current_user
 
 from ica.models.user import User
 from ica.forms import SignUpForm, LoginForm
+from ica.logger import client, constants
 
 website = Blueprint('website', __name__, template_folder='templates')
 
@@ -59,6 +60,19 @@ def signup():
             year=form.year.data
         )
         u.save()
+
+        client.log_event(
+            ip=request.remote_addr,
+            category=constants.LOG_CATEGORY_REGISTRATION,
+            event=constants.LOG_EVENT_SIGNUP,
+            data={
+                'user': '{} {}'.format(
+                    form.fname.data,
+                    form.lname.data
+                )
+            }
+        )
+
         flash('Head over to the login page to sign in!')
         return redirect(url_for('website.signup'))
     return render_template('website/signup.html', **{
@@ -75,6 +89,19 @@ def login():
     if request.method == 'POST' and form.validate():
         user = User.objects(email=form.email.data).first()
         login_user(user)
+
+        client.log_event(
+            ip=request.remote_addr,
+            category=constants.LOG_CATEGORY_REGISTRATION,
+            event=constants.LOG_EVENT_LOGIN,
+            data={
+                'user': '{} {}'.format(
+                    current_user.fname,
+                    current_user.lname
+                )
+            }
+        )
+
         return redirect(url_for('social.index'))
     return render_template('website/login.html', **{
         'user': current_user,

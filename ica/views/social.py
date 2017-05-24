@@ -73,7 +73,6 @@ def leaderboard():
     fields = ['fname', 'lname', 'pfpic_url', 'year', 'points']
     leaderboard = User.objects.only(*fields).order_by('-points')[:10]
     leaderboard = [user for user in leaderboard if user.points > 0]
-    print('entered leaderboard page view')
     return render_template('social/leaderboard.html', **{
         'user': current_user,
         'leaderboard': leaderboard
