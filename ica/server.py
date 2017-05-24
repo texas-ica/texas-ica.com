@@ -1,14 +1,10 @@
 import mongoengine
-import argparse
 import os
 
 from flask import Flask
 from flask_login import LoginManager
 from flask_debugtoolbar import DebugToolbarExtension
 
-from ica.settings import (
-    ProductionConfig, DevelopmentConfig, TestingConfig
-)
 from ica.api.v1 import api
 from ica.views.website import website
 from ica.views.social import social
@@ -51,7 +47,3 @@ login_manager.login_view = 'website.login'
 @login_manager.user_loader
 def load_user(user_id):
     return User.objects(id=user_id).first()
-
-
-if __name__ == '__main__':
-    app.run()
