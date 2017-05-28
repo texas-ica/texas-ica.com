@@ -1,6 +1,9 @@
 appdirs==1.4.3
 blinker==1.4
+boto3==1.4.4
+botocore==1.5.56
 click==6.7
+docutils==0.13.1
 flake8==3.3.0
 Flask==0.12.1
 Flask-Cache==0.13.1
@@ -9,8 +12,10 @@ Flask-Login==0.4.0
 flask-mongoengine==0.9.2
 Flask-WTF==0.14.2
 gunicorn==19.7.1
+imgurpython==1.1.7
 itsdangerous==0.24
 Jinja2==2.9.6
+jmespath==0.9.3
 MarkupSafe==1.0
 mccabe==0.6.1
 mongoengine==0.12.0
@@ -21,9 +26,12 @@ pycodestyle==2.3.1
 pyflakes==1.5.0
 pymongo==3.4.0
 pyparsing==2.2.0
+python-dateutil==2.6.0
 redis==2.10.5
 redispy==3.0.0
 requests==2.13.0
+rq==0.8.0
+s3transfer==0.1.10
 six==1.10.0
 slackclient==1.0.5
 websocket-client==0.40.0
