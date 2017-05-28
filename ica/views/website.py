@@ -6,6 +6,7 @@ from flask_login import login_user, logout_user, current_user
 
 from ica.models.user import User
 from ica.forms import SignUpForm, LoginForm
+from ica.tasks import low_queue
 from ica.logger import client, constants
 
 website = Blueprint('website', __name__, template_folder='templates')
@@ -61,17 +62,13 @@ def signup():
         )
         u.save()
 
-        client.log_event(
-            ip=request.remote_addr,
-            category=constants.LOG_CATEGORY_REGISTRATION,
-            event=constants.LOG_EVENT_SIGNUP,
-            data={
-                'user': '{} {}'.format(
-                    form.fname.data,
-                    form.lname.data
-                )
-            }
-        )
+        fname = current_user.fname
+        lname = current_user.lname
+
+        low_queue.enqueue(client.log_event, request.remote_addr,
+                          constants.LOG_CATEGORY_REGISTRATION,
+                          constants.LOG_EVENT_SIGNUP,
+                          {'user': '{} {}'.format(fname, lname)})
 
         flash('Head over to the login page to sign in!')
         return redirect(url_for('website.signup'))
@@ -90,17 +87,13 @@ def login():
         user = User.objects(email=form.email.data).first()
         login_user(user)
 
-        client.log_event(
-            ip=request.remote_addr,
-            category=constants.LOG_CATEGORY_REGISTRATION,
-            event=constants.LOG_EVENT_LOGIN,
-            data={
-                'user': '{} {}'.format(
-                    current_user.fname,
-                    current_user.lname
-                )
-            }
-        )
+        fname = current_user.fname
+        lname = current_user.lname
+
+        low_queue.enqueue(client.log_event, request.remote_addr,
+                          constants.LOG_CATEGORY_REGISTRATION,
+                          constants.LOG_EVENT_LOGIN,
+                          {'user': '{} {}'.format(fname, lname)})
 
         return redirect(url_for('social.index'))
     return render_template('website/login.html', **{
