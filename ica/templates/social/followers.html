@@ -17,7 +17,7 @@
             <a class="ui basic tiny green button" href="{{ 'follow/' ~ follower.id }}">Follow</a>
             {% endif %}
         </div>
-        <img class="ui mini rounded middle aligned image" src="{{ url_for('static', filename=follower.get_pfpic()) }}">
+        <img class="ui mini rounded middle aligned image" src="{{ follower.get_pfpic() }}">
         <div class="content">
             <h4 class="header">{{ follower.fname }} {{ follower.lname }}</h4>
             <div class="description">{{ follower.year }}</div>

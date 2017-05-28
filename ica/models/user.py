@@ -119,10 +119,11 @@ class User(Document, UserMixin):
 
     def get_pfpic(self):
         if self.pfpic_url:
-            url = 'tmp/' + self.pfpic_url
+            return self.pfpic_url
         else:
-            url = 'img/filler.jpg'
-        return url
+            url = 'https://s3.us-east-2.amazonaws.com/' + \
+                  'icadevelopment/' + 'filler.jpg'
+            return url
 
     def to_dict(self, extended=False):
         info = {

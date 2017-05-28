@@ -25,7 +25,7 @@
             <div class="right menu">
                 {% if user and user.is_authenticated %}
                     <div id="nav-profile" class="ui pointing dropdown link item">
-                        <img class="ui middle aligned mini rounded image" src="{{ url_for('static', filename=user.get_pfpic()) }}" style="margin-right: 13px;">
+                        <img class="ui middle aligned mini rounded image" src="{{ user.get_pfpic() }}" style="margin-right: 13px;">
                         <span>
                             <strong>{{ user.fname }} {{ user.lname }}</strong>
                             <br>

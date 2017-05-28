@@ -9,7 +9,7 @@
 <div id="profile" class="ui centered stackable grid">
     <div class="three wide column">
         <div class="ui left aligned container">
-            <img class="ui centered fluid rounded image" src="{{ url_for('static', filename=user.get_pfpic()) }}">
+            <img class="ui centered fluid rounded image" src="{{ user.pfpic_url }}">
 
             <h1>{{ user.fname }} {{ user.lname }}</h1>
 

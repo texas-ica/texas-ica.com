@@ -13,7 +13,7 @@
         {% for msg in msgs %}
         <div class="event">
             <div class="label">
-                <img src="{{ url_for('static', filename=msg.author.get_pfpic()) }}">
+                <img src="{{ msg.author.get_pfpic() }}">
             </div>
             <div class="content">
                 <div class="summary">

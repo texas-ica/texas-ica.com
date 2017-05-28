@@ -20,7 +20,7 @@
             <td>{{ loop.index }}</td>
             <td>
                 <h4 class="ui image header">
-                    <img class="ui mini rounded image" src="{{ url_for('static', filename=member.get_pfpic()) }}">
+                    <img class="ui mini rounded image" src="{{ member.get_pfpic() }}">
                     <div class="content">
                         {{ member.fname }} {{ member.lname }}
                         <div class="sub header">{{ member.year }}</div>

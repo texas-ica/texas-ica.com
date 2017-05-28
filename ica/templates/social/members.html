@@ -12,7 +12,7 @@
     <div class="column">
         <div class="ui card">
             <div class="image">
-                <img src="{{ url_for('static', filename=member.get_pfpic()) }}">
+                <img src="{{ member.get_pfpic() }}">
             </div>
             <div class="content">
                 <a class="header">{{ member.fname }} {{ member.lname }}</a>
@@ -50,7 +50,7 @@
     <div class="column">
         <div class="ui card">
             <div class="image">
-                <img src="{{ url_for('static', filename=member.get_pfpic()) }}">
+                <img src="{{ member.get_pfpic() }}">
             </div>
             <div class="content">
                 <a class="header">{{ member.fname }} {{ member.lname }}</a>
