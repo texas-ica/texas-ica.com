@@ -160,3 +160,6 @@ def upload_photo(photo_stream, filename, user_id):
         ExtraArgs={'ACL': 'public-read'}
     )
     f.close()
+
+    # Remove file from tmp
+    os.remove(path)
