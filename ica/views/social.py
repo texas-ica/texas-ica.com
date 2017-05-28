@@ -1,4 +1,3 @@
-import os
 import datetime
 
 from flask import Blueprint, render_template, redirect, request, flash, url_for
@@ -9,9 +8,9 @@ from ica.models.announcement import Announcement
 from ica.models.event import Event
 from ica.forms import ProfileForm, SearchForm
 from ica.utils import (
-    get_file_extension, allowed_filename, generate_token, resize_image,
-    get_recommended_users
+    get_file_extension, allowed_filename, upload_photo, get_recommended_users
 )
+from ica.tasks import high_queue
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 UPLOAD_FOLDER = 'tmp'
@@ -124,7 +123,7 @@ def upload_pfpic():
 
         # If user does not select a file, browser must also
         # submit an empty part without file part
-        pic = request.files['file']
+        pic = request._get_current_object().files['file']
         if pic.filename == '':
             flash('You have not selected a picture to upload.', 'error')
             return redirect(url_for('social.settings'))
@@ -137,27 +136,13 @@ def upload_pfpic():
         if pic and allowed_filename(pic.filename, ALLOWED_EXTENSIONS):
             # Generate unique picture token
             ext = get_file_extension(pic.filename)
-            filename = '{}.{}'.format(generate_token(), ext)
+            filename = '{}.{}'.format(current_user.id, ext)
 
-            # Save the picture locally
-            parent = os.path.dirname(
-                os.path.dirname(os.path.abspath(__file__))
-            )
-            upload_folder = os.path.join(parent, 'static', UPLOAD_FOLDER)
-            pic.save(os.path.join(upload_folder, filename))
+            # Complete task asynchronously
+            high_queue.enqueue(upload_photo, pic.read(), filename,
+                               current_user.id)
 
-            # Resize image
-            resize_image(upload_folder, filename)
-
-            flash('Your picture was successfully uploaded!', 'success')
-
-            # Remove old picture if it exists
-            if current_user.pfpic_url is not None:
-                os.remove(os.path.join(upload_folder, current_user.pfpic_url))
-
-            # Update user model with picture location
-            current_user.update(set__pfpic_url=filename)
-
+            flash('Your picture will be uploaded momentarily!', 'success')
             return redirect(url_for('social.settings'))
 
 

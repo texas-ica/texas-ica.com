@@ -1,14 +1,17 @@
 import os
 import json
 import uuid
+import random
 from functools import wraps
 
+import mongoengine
 from PIL import Image, ImageOps
 from flask import url_for, redirect
 from flask_login import current_user
 
 from ica.models.user import User
 from ica.cache import cache
+from ica.images import s3
 
 
 def admin_required(f):
@@ -38,7 +41,11 @@ def allowed_filename(filename, whitelist):
 
 
 def generate_token():
-    """Generates unique profile picture token"""
+    """
+    DEPRECATED - use the user's MongoDB ObjectID instead
+
+    Generates unique profile picture token
+    """
 
     return uuid.uuid4().hex
 
@@ -111,17 +118,64 @@ def get_recommended_users(user, limit=4):
     recommended = sorted(recommended, key=lambda x: x[1])
     recommended = [friend for (friend, weight) in recommended]
 
-    return recommended[:limit]
+    return random.shuffle(recommended[:limit])
 
 
-def resize_image(upload_folder, filename):
+def resize_image(path):
     """
     Creates a 600x600 square thumbnail from an image
     and overwrites it in its current directory
     """
 
     dimension = (600, 600)
-    path = os.path.join(upload_folder, filename)
     img = Image.open(path)
     thumb = ImageOps.fit(img, dimension, Image.ANTIALIAS)
     thumb.save(path)
+
+
+def upload_photo(photo_stream, filename, user_id):
+    """
+    Task that asynchronously downloads a user's profile picture,
+    resizes it in /tmp, uploads it to S3, and updates the user's
+    pfpic_url with the image's public S3 link
+    """
+
+    parent = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    path = os.path.join(parent, 'tmp', filename)
+
+    # Write photo byte stream to file in /tmp
+    f = open(path, 'wb+')
+    f.write(photo_stream)
+    f.close()
+
+    # Resize image
+    resize_image(path)
+
+    # Upload image to S3
+    f = open(path, 'rb')
+    bucket_name = 'icadevelopment'
+    s3.upload_fileobj(
+        f,
+        bucket_name,
+        filename,
+        ExtraArgs={'ACL': 'public-read'}
+    )
+    f.close()
+
+    # Connect to database, update the user's pfpic_url attribute
+    # with the public S3 link, and disconnect from the database
+    db_auth = {
+        'db': os.getenv('TASK_DATABASE_NAME'),
+        'host': os.getenv('TASK_DATABASE_HOST'),
+        'username': os.getenv('TASK_DATABASE_USER'),
+        'password': os.getenv('TASK_DATABASE_PASSWORD')
+    }
+
+    mongoengine.connection.connect(alias='default', **db_auth)
+    user = User.objects(id=user_id).first()
+
+    link = 'https://s3.us-east-2.amazonaws.com/' + bucket_name + \
+           '/' + filename
+    user.update(set__pfpic_url=link)
+
+    mongoengine.connection.disconnect(alias='default')
