@@ -53,11 +53,13 @@ a:hover {
 .ui.positive.message {
   font-family: inherit;
   margin: 2% 0%;
+  color: #000000;
 }
 
 .ui.negative.message {
   font-family: inherit;
   margin: 2% 0%;
+  color: #000000;
 }
 
 #nav {
@@ -119,6 +121,13 @@ a:hover {
 }
 #profile p {
   color: #6A737D;
+}
+#profile .ui.fluid.image {
+  max-width: 100%;
+  max-height: 100%;
+}
+#profile .ui.success.message p {
+  color: #000000;
 }
 #profile .tiny.label {
   background-color: #5DD39E;

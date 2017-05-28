@@ -53,11 +53,13 @@ a:hover {
 .ui.positive.message {
   font-family: inherit;
   margin: 2% 0%;
+  color: #000000;
 }
 
 .ui.negative.message {
   font-family: inherit;
   margin: 2% 0%;
+  color: #000000;
 }
 
 #nav {

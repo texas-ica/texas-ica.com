@@ -6,6 +6,11 @@ h1, h2, h3, h4, h5 {
   font-family: "Roboto", sans-serif;
 }
 
+.content h1.ui.header {
+  font-family: inherit;
+  font-weight: 400;
+}
+
 #jumbotron {
   background-image: url("../img/tapestry.jpeg");
   background-size: cover;
@@ -94,6 +99,10 @@ h1, h2, h3, h4, h5 {
 }
 #board .grid {
   margin: 2% 0%;
+}
+#board .ui.card > .content > a.header {
+  font-family: inherit;
+  font-weight: 400;
 }
 
 #faq {
