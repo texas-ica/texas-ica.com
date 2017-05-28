@@ -4,7 +4,6 @@ import uuid
 import random
 from functools import wraps
 
-import mongoengine
 from PIL import Image, ImageOps
 from flask import url_for, redirect
 from flask_login import current_user
@@ -161,21 +160,3 @@ def upload_photo(photo_stream, filename, user_id):
         ExtraArgs={'ACL': 'public-read'}
     )
     f.close()
-
-    # Connect to database, update the user's pfpic_url attribute
-    # with the public S3 link, and disconnect from the database
-    db_auth = {
-        'db': os.getenv('TASK_DATABASE_NAME'),
-        'host': os.getenv('TASK_DATABASE_HOST'),
-        'username': os.getenv('TASK_DATABASE_USER'),
-        'password': os.getenv('TASK_DATABASE_PASSWORD')
-    }
-
-    mongoengine.connection.connect(alias='default', **db_auth)
-    user = User.objects(id=user_id).first()
-
-    link = 'https://s3.us-east-2.amazonaws.com/' + bucket_name + \
-           '/' + filename
-    user.update(set__pfpic_url=link)
-
-    mongoengine.connection.disconnect(alias='default')

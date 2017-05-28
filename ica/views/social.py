@@ -138,6 +138,12 @@ def upload_pfpic():
             ext = get_file_extension(pic.filename)
             filename = '{}.{}'.format(current_user.id, ext)
 
+            # Set profile picture URL
+            bucket_name = 'icadevelopment'
+            link = 'https://s3.us-east-2.amazonaws.com/' + bucket_name + \
+                   '/' + filename
+            current_user.update(set__pfpic_url=link)
+
             # Complete task asynchronously
             high_queue.enqueue(upload_photo, pic.read(), filename,
                                current_user.id)
