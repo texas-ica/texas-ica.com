@@ -7,7 +7,7 @@ from flask_login import login_user, logout_user, current_user
 from ica.models.user import User
 from ica.forms import SignUpForm, LoginForm
 from ica.tasks import low_queue
-from ica.logger import client, constants
+from ica.logger import client
 
 website = Blueprint('website', __name__, template_folder='templates')
 
@@ -62,13 +62,11 @@ def signup():
         )
         u.save()
 
-        fname = current_user.fname
-        lname = current_user.lname
-
-        low_queue.enqueue(client.log_event, request.remote_addr,
-                          constants.LOG_CATEGORY_REGISTRATION,
-                          constants.LOG_EVENT_SIGNUP,
-                          {'user': '{} {}'.format(fname, lname)})
+        low_queue.enqueue(
+            client.log_event,
+            request.environ['REMOTE_ADDR'],
+            '{} {} signed up'.format(u.fname, u.lname)
+        )
 
         flash('Head over to the login page to sign in!')
         return redirect(url_for('website.signup'))
@@ -87,13 +85,12 @@ def login():
         user = User.objects(email=form.email.data).first()
         login_user(user)
 
-        fname = current_user.fname
-        lname = current_user.lname
-
-        low_queue.enqueue(client.log_event, request.remote_addr,
-                          constants.LOG_CATEGORY_REGISTRATION,
-                          constants.LOG_EVENT_LOGIN,
-                          {'user': '{} {}'.format(fname, lname)})
+        low_queue.enqueue(
+            client.log_event,
+            request.environ['REMOTE_ADDR'],
+            '{} {} logged in'.format(current_user.fname,
+                                     current_user.lname)
+        )
 
         return redirect(url_for('social.index'))
     return render_template('website/login.html', **{

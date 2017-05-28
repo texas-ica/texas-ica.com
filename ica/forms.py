@@ -1,3 +1,4 @@
+from flask import request
 from flask_wtf import FlaskForm
 from wtforms import (
     StringField, PasswordField, SelectField, IntegerField, BooleanField,
@@ -8,6 +9,8 @@ from wtforms.validators import (
 )
 
 from ica.models.user import User
+from ica.logger import client
+from ica.tasks import low_queue
 
 
 class SignUpForm(FlaskForm):
@@ -66,12 +69,30 @@ class LoginForm(FlaskForm):
             msg = 'The email you\'ve entered doesn\'t match ' + \
                   ' any existing account.'
             self.email.errors.append(msg)
+
+            low_queue.enqueue(
+                client.log_event,
+                request.environ['REMOTE_ADDR'],
+                'Anonymous entered incorrect email \'{}\''.format(
+                    self.email.data
+                )
+            )
+
             return False
 
         # Check if user's password is correct
         if not existing_user.check_password(self.pwd.data):
             msg = 'The password you\'ve entered is incorrect.'
             self.pwd.errors.append(msg)
+
+            low_queue.enqueue(
+                client.log_event,
+                request.environ['REMOTE_ADDR'],
+                'Anonymous entered incorrect password \'{}\''.format(
+                    self.pwd.data
+                )
+            )
+
             return False
 
         return True

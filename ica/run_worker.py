@@ -3,7 +3,13 @@ import urllib.parse as urlparse
 
 from redis import Redis
 from rq import Queue, Connection
-from rq.worker import HerokuWorker as Worker
+
+config = os.getenv('CONFIG')
+
+if 'Testing' in config:
+    from rq.worker import Worker
+else:
+    from rq.worker import HerokuWorker as Worker
 
 listen = ['high', 'default', 'low']
 

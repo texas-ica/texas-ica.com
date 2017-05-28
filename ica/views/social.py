@@ -10,7 +10,8 @@ from ica.forms import ProfileForm, SearchForm
 from ica.utils import (
     get_file_extension, allowed_filename, upload_photo, get_recommended_users
 )
-from ica.tasks import high_queue
+from ica.logger import client
+from ica.tasks import low_queue, high_queue
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 UPLOAD_FOLDER = 'tmp'
@@ -58,6 +59,15 @@ def members():
         member_set = User.objects.only(*fields).search_text(
             query
         ).order_by('fname').filter(id__ne=current_user.id)
+
+        low_queue.enqueue(
+            client.log_event,
+            request.environ['REMOTE_ADDR'],
+            '{} {} searched for \'{}\''.format(current_user.fname,
+                                               current_user.lname,
+                                               query)
+        )
+
     return render_template('social/members.html', **{
         'user': current_user,
         'search_form': search_form,
@@ -161,6 +171,13 @@ def follow_member(user_id):
         if user_b.id != user_a.id:
             user_a.update(add_to_set__following=user_b)
             user_b.update(add_to_set__followers=user_a)
+
+            low_queue.enqueue(
+                client.log_event,
+                request.environ['REMOTE_ADDR'],
+                '{} {} followed {} {}'.format(user_a.fname, user_a.lname,
+                                              user_b.fname, user_b.lname)
+            )
     return redirect(url_for('social.followers'))
 
 
@@ -172,4 +189,11 @@ def unfollow_member(user_id):
         user_a = User.objects(id=current_user.id).only('id').first()
         user_a.update(pull__following=user_b)
         user_b.update(pull__followers=user_a)
+
+        low_queue.enqueue(
+            client.log_event,
+            request.environ['REMOTE_ADDR'],
+            '{} {} unfollowed {} {}'.format(user_a.fname, user_a.lname,
+                                            user_b.fname, user_b.lname)
+        )
     return redirect(url_for('social.followers'))
