@@ -64,7 +64,7 @@ def signup():
 
         low_queue.enqueue(
             client.log_event,
-            request.environ['REMOTE_ADDR'],
+            request.headers.get('X-Forwarded-For', request.remote_addr),
             '{} {} signed up'.format(u.fname, u.lname)
         )
 
@@ -87,7 +87,7 @@ def login():
 
         low_queue.enqueue(
             client.log_event,
-            request.environ['REMOTE_ADDR'],
+            request.headers.get('X-Forwarded-For', request.remote_addr),
             '{} {} logged in'.format(current_user.fname,
                                      current_user.lname)
         )

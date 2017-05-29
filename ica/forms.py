@@ -72,7 +72,7 @@ class LoginForm(FlaskForm):
 
             low_queue.enqueue(
                 client.log_event,
-                request.environ['REMOTE_ADDR'],
+                request.headers.get('X-Forwarded-For', request.remote_addr),
                 'Anonymous entered incorrect email \'{}\''.format(
                     self.email.data
                 )
@@ -87,7 +87,7 @@ class LoginForm(FlaskForm):
 
             low_queue.enqueue(
                 client.log_event,
-                request.environ['REMOTE_ADDR'],
+                request.headers.get('X-Forwarded-For', request.remote_addr),
                 'Anonymous entered incorrect password \'{}\''.format(
                     self.pwd.data
                 )

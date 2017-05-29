@@ -62,7 +62,7 @@ def members():
 
         low_queue.enqueue(
             client.log_event,
-            request.environ['REMOTE_ADDR'],
+            request.headers.get('X-Forwarded-For', request.remote_addr),
             '{} {} searched for \'{}\''.format(current_user.fname,
                                                current_user.lname,
                                                query)
@@ -174,7 +174,7 @@ def follow_member(user_id):
 
             low_queue.enqueue(
                 client.log_event,
-                request.environ['REMOTE_ADDR'],
+                request.headers.get('X-Forwarded-For', request.remote_addr),
                 '{} {} followed {} {}'.format(user_a.fname, user_a.lname,
                                               user_b.fname, user_b.lname)
             )
@@ -192,7 +192,7 @@ def unfollow_member(user_id):
 
         low_queue.enqueue(
             client.log_event,
-            request.environ['REMOTE_ADDR'],
+            request.headers.get('X-Forwarded-For', request.remote_addr),
             '{} {} unfollowed {} {}'.format(user_a.fname, user_a.lname,
                                             user_b.fname, user_b.lname)
         )
