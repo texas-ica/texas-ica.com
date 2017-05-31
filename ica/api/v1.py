@@ -96,8 +96,8 @@ def get_one_user(user_id):
     })
 
 
-@api.route('/users/follow/<string:user_id>', methods=['POST'])
-def follow_user(user_id):
+@api.route('/users/follow/', methods=['POST'])
+def follow_user():
     """
     Follows a user using his/her unique id (MongoDB
     ObjectID). Success relies on authentication - if the
@@ -108,6 +108,8 @@ def follow_user(user_id):
     METHOD: POST
     URL params: None
     """
+
+    user_id = request.values.get('user_id')
 
     if hasattr(current_user, 'id'):
         user_a = User.objects(id=current_user.id).only('id').first()
@@ -127,8 +129,8 @@ def follow_user(user_id):
     })
 
 
-@api.route('/users/unfollow/<string:user_id>', methods=['POST'])
-def unfollow_user(user_id):
+@api.route('/users/unfollow/', methods=['POST'])
+def unfollow_user():
     """
     Unfollows a user using his/her unique id (MongoDB
     ObjectID). Success relies on authentication - if the
@@ -139,6 +141,8 @@ def unfollow_user(user_id):
     METHOD: POST
     URL params: None
     """
+
+    user_id = request.values.get('user_id')
 
     if hasattr(current_user, 'id'):
         user_a = User.objects(id=current_user.id).only('id').first()
