@@ -59,7 +59,7 @@ def jsonify_response(resp):
     return json.loads(resp_string)
 
 
-@cache.memoize(timeout=60 * 60)
+#@cache.memoize(timeout=60 * 60)
 def get_recommended_users(user, limit=4):
     """
     Algorithm that returns a list of up to four users
@@ -117,7 +117,10 @@ def get_recommended_users(user, limit=4):
     recommended = sorted(recommended, key=lambda x: x[1])
     recommended = [friend for (friend, weight) in recommended]
 
-    return random.shuffle(recommended[:limit])
+    recommended = recommended[:limit]
+    random.shuffle(recommended)
+
+    return recommended
 
 
 def resize_image(path):
