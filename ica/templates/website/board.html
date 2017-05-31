@@ -10,12 +10,12 @@
     <div class="ui four column stackable grid">
         {% for key, value in data %}
         <div class="column">
-            <div class="ui fluid card">
+            <div id="prof-{{ key }}" class="ui fluid card">
                 <div class="image">
                     <img src="{{ url_for('static', filename='img/' + value.pic) }}">
                 </div>
                 <div class="content">
-                    <a id="prof-{{ key }}" class="header" href="#">{{ value.name }}</a>
+                    <a class="header" href="#">{{ value.name }}</a>
                     <div class="meta">
                         <p>{{ value.position }}</p>
                     </div>

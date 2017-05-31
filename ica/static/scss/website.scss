@@ -118,6 +118,12 @@ h1, h2, h3, h4, h5 {
         color: $medium-gray;
     }
 
+    img {
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        transition: all 0.2s linear;
+    }
+
     .grid {
         margin: 2% 0%;
     }

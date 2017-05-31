@@ -12,9 +12,9 @@
     <div class="item">
         <div class="right floated content">
             {% if user.is_following(follower) %}
-            <a class="ui basic tiny red button" href="{{ 'unfollow/' ~ follower.id }}">Unfollow</a>
+            <button class="ui basic tiny red button follow" user="{{ follower.id }}">Unfollow</button>
             {% else %}
-            <a class="ui basic tiny green button" href="{{ 'follow/' ~ follower.id }}">Follow</a>
+            <button class="ui basic tiny green button follow" user="{{ follower.id }}">Follow</button>
             {% endif %}
         </div>
         <img class="ui mini rounded middle aligned image" src="{{ follower.get_pfpic() }}">

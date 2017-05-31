@@ -97,6 +97,11 @@ h1, h2, h3, h4, h5 {
 #board p {
   color: #6A737D;
 }
+#board img {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  transition: all 0.2s linear;
+}
 #board .grid {
   margin: 2% 0%;
 }

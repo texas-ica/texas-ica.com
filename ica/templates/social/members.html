@@ -21,9 +21,9 @@
                 </div>
                 <div class="extra content">
                     {% if user.is_following(member) %}
-                    <a class="ui basic tiny red button" href="{{ 'unfollow/' ~ member.id }}">Unfollow</a>
+                    <button class="ui basic tiny red button follow" user="{{ member.id }}">Unfollow</button>
                     {% else %}
-                    <a class="ui basic tiny green button" href="{{ 'follow/' ~ member.id }}">Follow</a>
+                    <button class="ui basic tiny green button follow" user="{{ member.id }}">Follow</button>
                     {% endif %}
                 </div>
             </div>
@@ -59,9 +59,9 @@
                 </div>
                 <div class="extra content">
                     {% if user.is_following(member) %}
-                    <a class="ui basic tiny red button" href="{{ 'unfollow/' ~ member.id }}">Unfollow</a>
+                    <button class="ui basic tiny red button follow" user="{{ member.id }}">Unfollow</button>
                     {% else %}
-                    <a class="ui basic tiny green button" href="{{ 'follow/' ~ member.id }}">Follow</a>
+                    <button class="ui basic tiny green button follow" user="{{ member.id }}">Follow</button>
                     {% endif %}
                 </div>
             </div>
