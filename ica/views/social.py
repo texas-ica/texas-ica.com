@@ -148,15 +148,19 @@ def upload_pfpic():
             ext = get_file_extension(pic.filename)
             filename = '{}.{}'.format(current_user.id, ext)
 
+            # Get time at which pictuer was uploaded
+            # %H%M%S - Hour-Minute-Seconds
+            time = datetime.datetime.now().strftime('%H%M%S')
+
             # Set profile picture URL
             bucket_name = 'icadevelopment'
             link = 'https://s3.us-east-2.amazonaws.com/' + bucket_name + \
-                   '/' + filename
+                   '/{}-{}'.format(time, filename)
             current_user.update(set__pfpic_url=link)
 
             # Complete task asynchronously
             high_queue.enqueue(upload_photo, pic.read(), filename,
-                               current_user.id)
+                               time, current_user.id)
 
             flash('Your picture will be uploaded momentarily!', 'success')
             return redirect(url_for('social.settings'))
@@ -165,6 +169,8 @@ def upload_pfpic():
 @social.route('/follow/<string:user_id>', methods=['GET'])
 @login_required
 def follow_member(user_id):
+    """DEPRECATED - use the /follow API endpoint"""
+
     user_b = User.objects(id=user_id).only('id').first()
     if user_b:
         user_a = User.objects(id=current_user.id).only('id').first()
@@ -184,6 +190,8 @@ def follow_member(user_id):
 @social.route('/unfollow/<string:user_id>', methods=['GET'])
 @login_required
 def unfollow_member(user_id):
+    """DEPRECATED - use the /unfollow API endpoint"""
+    
     user_b = User.objects(id=user_id).only('id').first()
     if user_b:
         user_a = User.objects(id=current_user.id).only('id').first()

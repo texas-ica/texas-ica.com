@@ -135,7 +135,7 @@ def resize_image(path):
     thumb.save(path)
 
 
-def upload_photo(photo_stream, filename, user_id):
+def upload_photo(photo_stream, filename, time, user_id):
     """
     Task that asynchronously downloads a user's profile picture,
     resizes it in /tmp, uploads it to S3, and updates the user's
@@ -143,7 +143,7 @@ def upload_photo(photo_stream, filename, user_id):
     """
 
     parent = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    path = os.path.join(parent, 'tmp', filename)
+    path = os.path.join(parent, 'tmp', '{}-{}'.format(time, filename))
 
     # Write photo byte stream to file in /tmp
     f = open(path, 'wb+')
@@ -159,7 +159,7 @@ def upload_photo(photo_stream, filename, user_id):
     s3.upload_fileobj(
         f,
         bucket_name,
-        filename,
+        time + '-' + filename,
         ExtraArgs={'ACL': 'public-read'}
     )
     f.close()
