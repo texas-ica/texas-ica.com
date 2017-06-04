@@ -1,127 +1,94 @@
 h1, h2, h3, h4, h5 {
-  font-family: "Roboto", sans-serif;
-}
+  font-family: "Roboto", sans-serif; }
 
 .ui.header {
-  font-family: "Roboto", sans-serif;
-}
+  font-family: "Roboto", sans-serif; }
 
 .content h1.ui.header {
   font-family: inherit;
-  font-weight: 400;
-}
+  font-weight: 400; }
 
 #jumbotron {
   background-image: url("../img/tapestry.jpeg");
-  background-size: cover;
-}
+  background-size: cover; }
 
 #banner {
-  padding: 5%;
-}
-#banner .ui.header, #banner p {
-  color: #FFFFFF;
-  text-shadow: 1px 1px 5px #000000;
-}
+  padding: 5%; }
+  #banner .ui.header, #banner p {
+    color: #FFFFFF;
+    text-shadow: 1px 1px 5px #000000; }
 
 #about {
-  margin-top: 2%;
-}
-#about h2 {
-  font-weight: 400;
-}
-#about p {
-  color: #6A737D;
-}
-#about .grid {
-  margin: 2% 0%;
-}
+  margin-top: 2%; }
+  #about h2 {
+    font-weight: 400; }
+  #about p {
+    color: #6A737D; }
+  #about .grid {
+    margin: 2% 0%; }
 
 #join {
-  margin-top: 2%;
-}
-#join h2 {
-  font-weight: 400;
-}
-#join p {
-  color: #6A737D;
-}
-#join .row {
-  margin: 2% 0%;
-}
-#join .grid {
-  margin: 2% 0%;
-  margin-bottom: 0;
-}
+  margin-top: 2%; }
+  #join h2 {
+    font-weight: 400; }
+  #join p {
+    color: #6A737D; }
+  #join .row {
+    margin: 2% 0%; }
+  #join .grid {
+    margin: 2% 0%;
+    margin-bottom: 0; }
 
 #events {
-  margin-top: 2%;
-}
-#events h2 {
-  font-weight: 400;
-}
-#events p {
-  color: #6A737D;
-}
-#events .row {
-  margin: 2% 0%;
-}
-#events .grid {
-  margin: 2% 0%;
-  margin-bottom: 0;
-}
+  margin-top: 2%; }
+  #events h2 {
+    font-weight: 400; }
+  #events p {
+    color: #6A737D; }
+  #events .row {
+    margin: 2% 0%; }
+  #events .grid {
+    margin: 2% 0%;
+    margin-bottom: 0; }
 
 #contact {
-  margin-top: 2%;
-}
-#contact h2 {
-  font-weight: 400;
-}
-#contact p {
-  color: #6A737D;
-}
+  margin-top: 2%; }
+  #contact h2 {
+    font-weight: 400; }
+  #contact p {
+    color: #6A737D; }
+  #contact .ui.grid {
+    margin: 2% 0%; }
 
 #blog {
-  margin-top: 2%;
-}
-#blog p {
-  color: #6A737D;
-}
-#blog .post {
-  margin: 2% 0%;
-}
+  margin-top: 2%; }
+  #blog p {
+    color: #6A737D; }
+  #blog .post {
+    margin: 2% 0%; }
 
 #board {
-  margin-top: 2%;
-}
-#board p {
-  color: #6A737D;
-}
-#board img {
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
-  transition: all 0.2s linear;
-}
-#board .grid {
-  margin: 2% 0%;
-}
-#board .ui.card > .content > a.header {
-  font-family: inherit;
-  font-weight: 400;
-}
+  margin-top: 2%; }
+  #board p {
+    color: #6A737D; }
+  #board img {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    transition: all 0.2s linear; }
+  #board .grid {
+    margin: 2% 0%; }
+  #board .ui.card > .content > a.header {
+    font-family: inherit;
+    font-weight: 400; }
 
 #faq {
-  margin-top: 2%;
-}
-#faq p {
-  margin-bottom: 2%;
-  color: #6A737D;
-}
+  margin-top: 2%; }
+  #faq p {
+    margin-bottom: 2%;
+    color: #6A737D; }
 
 #signup {
-  margin: 2% 0%;
-}
+  margin: 2% 0%; }
 
 #login {
-  margin: 2% 0%;
-}
+  margin: 2% 0%; }

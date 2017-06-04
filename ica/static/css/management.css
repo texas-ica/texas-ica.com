@@ -1,66 +1,53 @@
 * {
-  font-family: "Roboto", sans-serif;
-}
+  font-family: "Roboto", sans-serif; }
 
 body {
-  background-color: rgba(243, 243, 246, 0.1);
-}
+  background-color: rgba(243, 243, 246, 0.1); }
 
 input {
-  font-family: inherit;
-}
+  font-family: inherit; }
 
 a {
   color: #00A8E8;
-  transition: all 0.1s linear;
-}
+  transition: all 0.1s linear; }
 
 a:hover {
-  color: #007099;
-}
+  color: #007099; }
 
 .ui.button {
   font-family: inherit;
   background-color: #5DD39E;
   color: #FFFFFF;
-  transition: all 0.1s linear;
-}
+  transition: all 0.1s linear; }
 
 .ui.button:hover {
   background-color: #31A973;
-  color: #FFFFFF;
-}
+  color: #FFFFFF; }
 
 .ui.primary.button {
   background-color: #5DD39E;
   color: #FFFFFF;
-  transition: all 0.1s linear;
-}
+  transition: all 0.1s linear; }
 
 .ui.primary.button:hover {
   background-color: #31A973;
-  color: #FFFFFF;
-}
+  color: #FFFFFF; }
 
 .ui.form {
-  font-family: inherit;
-}
+  font-family: inherit; }
 
 .ui.form input[type=text] {
-  font-family: inherit;
-}
+  font-family: inherit; }
 
 .ui.positive.message {
   font-family: inherit;
   margin: 2% 0%;
-  color: #000000;
-}
+  color: #000000; }
 
 .ui.negative.message {
   font-family: inherit;
   margin: 2% 0%;
-  color: #000000;
-}
+  color: #000000; }
 
 #nav {
   border-radius: 0;
@@ -68,61 +55,46 @@ a:hover {
   padding: 1% 5%;
   background: #FFFFFF;
   border: 1px solid #FFFFFF;
-  border-bottom: 1px solid #DBDBDB;
-}
-#nav a.item {
-  font-family: "Roboto", sans-serif;
-  border-left: none;
-  border-right: none;
-}
+  border-bottom: 1px solid #DBDBDB; }
+  #nav a.item {
+    font-family: "Roboto", sans-serif;
+    border-left: none;
+    border-right: none; }
 
 .right.menu {
-  font-family: "Roboto", sans-serif;
-}
+  font-family: "Roboto", sans-serif; }
 
 .ui.footer {
   padding: 2% 0%;
   background-color: #FFFFFF;
-  box-shadow: 0px 500px 0px 500px #FFFFFF;
-}
-.ui.footer p {
-  font-size: 14px;
-}
+  box-shadow: 0px 500px 0px 500px #FFFFFF; }
+  .ui.footer p {
+    font-size: 14px; }
 
 #title {
   font-family: "Roboto", sans-serif;
-  margin: 3%;
-}
+  margin: 3%; }
 
 #apps {
   padding: 2%;
-  font-family: "Roboto", sans-serif;
-}
-#apps a {
-  color: #00A8E8;
-  transition: all 0.1s linear;
-}
-#apps a:hover {
-  color: #007099;
-}
-#apps p {
-  color: #6A737D;
-}
-#apps h3 {
-  font-family: inherit;
-}
+  font-family: "Roboto", sans-serif; }
+  #apps a {
+    color: #00A8E8;
+    transition: all 0.1s linear; }
+  #apps a:hover {
+    color: #007099; }
+  #apps p {
+    color: #6A737D; }
+  #apps h3 {
+    font-family: inherit; }
 
 .ui.breadcrumb {
-  padding: 2% 0%;
-}
-.ui.breadcrumb a {
-  color: #348AA7;
-  transition: all 0.1s linear;
-}
-.ui.breadcrumb a:hover {
-  color: #186680;
-}
+  padding: 2% 0%; }
+  .ui.breadcrumb a {
+    color: #348AA7;
+    transition: all 0.1s linear; }
+  .ui.breadcrumb a:hover {
+    color: #186680; }
 
 .ui.footer {
-  margin-top: 2%;
-}
+  margin-top: 2%; }
