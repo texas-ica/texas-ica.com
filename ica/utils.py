@@ -59,7 +59,7 @@ def jsonify_response(resp):
     return json.loads(resp_string)
 
 
-#@cache.memoize(timeout=60 * 60)
+@cache.memoize(timeout=60 * 60)
 def get_recommended_users(user, limit=4):
     """
     Algorithm that returns a list of up to four users

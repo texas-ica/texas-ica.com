@@ -191,7 +191,6 @@ def follow_member(user_id):
 @login_required
 def unfollow_member(user_id):
     """DEPRECATED - use the /unfollow API endpoint"""
-    
     user_b = User.objects(id=user_id).only('id').first()
     if user_b:
         user_a = User.objects(id=current_user.id).only('id').first()
