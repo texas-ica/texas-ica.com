@@ -7,6 +7,9 @@ body {
 input {
   font-family: inherit; }
 
+h1 {
+  font-family: "Roboto", sans-serif; }
+
 a {
   color: #00A8E8;
   transition: all 0.1s linear; }
@@ -15,7 +18,7 @@ a:hover {
   color: #007099; }
 
 .ui.button {
-  font-family: inherit;
+  font-family: "Roboto", sans-serif;
   background-color: #5DD39E;
   color: #FFFFFF;
   transition: all 0.1s linear; }
@@ -70,6 +73,9 @@ a:hover {
   box-shadow: 0px 500px 0px 500px #FFFFFF; }
   .ui.footer p {
     font-size: 14px; }
+
+#error {
+  margin: 2% 0%; }
 
 #title {
   font-family: "Roboto", sans-serif;

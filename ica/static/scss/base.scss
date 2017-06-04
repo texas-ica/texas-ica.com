@@ -12,6 +12,10 @@ input {
     font-family: inherit;
 }
 
+h1 {
+    font-family: "Roboto", sans-serif;
+}
+
 a {
     color: $vivid-cerulean;
     transition: all 0.1s linear;
@@ -22,7 +26,7 @@ a:hover {
 }
 
 .ui.button {
-    font-family: inherit;
+    font-family: "Roboto", sans-serif;
     background-color: $medium-aquamarine;
     color: $white;
     transition: all 0.1s linear;
@@ -91,4 +95,8 @@ a:hover {
     p {
         font-size: 14px;
     }
+}
+
+#error {
+    margin: 2% 0%;
 }
