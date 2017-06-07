@@ -1,0 +1,29 @@
+{% extends "social/layout.html" %}
+{% from "macros.html" import render_success, render_error %}
+{% from "social/macros.html" import render_event %}
+
+{% block title %}ICA - Check In{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="ui small {{ msg_type }} message">
+            <i class="close icon"></i>
+            <div class="header">{{ header }}</div>
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+<div id="checkin">
+    <h3>Check In by Unique Code</h3>
+    <form class="ui form" action="{{ url_for('social.checkin') }}" method="POST">
+        {{ checkin_form.csrf_token }}
+        <div class="two fields">
+            {{ checkin_form.code }}
+            <button class="ui button" type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -78,7 +78,7 @@ def search_users(query):
     })
 
 
-@api.route('/users/<int:user_id>', methods=['GET'])
+@api.route('/users/<string:user_id>', methods=['GET'])
 def get_one_user(user_id):
     """
     Gets a single user from the database using his/her
@@ -93,6 +93,27 @@ def get_one_user(user_id):
 
     return jsonify({
         'data': user
+    })
+
+
+@api.route('/users/<string:user_id>/points', methods=['POST'])
+def update_user_points(user_id):
+    """
+    Updates a user's points using his/her unique
+    id (MongoDB ObjectID).
+
+    URL: /users/<user_id>
+    METHOD: POST
+    URL params: none
+    """
+
+    points = int(request.values.get('points'))
+
+    user = User.objects(id=user_id).first()
+    user.update(inc__points=points)
+
+    return jsonify({
+        'success': True
     })
 
 

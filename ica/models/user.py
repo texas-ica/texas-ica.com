@@ -133,7 +133,8 @@ class User(Document, UserMixin):
             'email': self.email,
             'major': self.major,
             'year': self.year,
-            'hometown': self.hometown
+            'hometown': self.hometown,
+            'points': self.points
         }
 
         if extended:
@@ -143,7 +144,6 @@ class User(Document, UserMixin):
                          user in self.following]
 
             info.update({
-                'points': self.points,
                 'bio': self.bio,
                 'board_member': self.board_member,
                 'board_position': self.board_position,

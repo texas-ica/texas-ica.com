@@ -1,5 +1,5 @@
 from mongoengine import (
-    Document, StringField, DecimalField, DateTimeField,
+    Document, StringField, IntField, DateTimeField,
     ListField, ReferenceField
 )
 
@@ -23,7 +23,13 @@ class Event(Document):
     description = StringField(required=True)
 
     # Points per hour for members
-    pts = DecimalField(min_value=0.0, required=True)
+    pts = IntField(min_value=0, required=True)
+
+    # Link to QR code
+    qr_code = StringField()
+
+    # Unique event code
+    code = StringField()
 
     # Link to Facebook event - might not be relevant for
     # ad-hoc events like 'Flash Study Hours'

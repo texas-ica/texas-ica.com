@@ -1,3 +1,5 @@
+import math
+
 from flask import (
     Blueprint, render_template, request, redirect, flash, url_for
 )
@@ -8,7 +10,7 @@ from ica.models.user import User
 from ica.models.announcement import Announcement
 from ica.models.event import Event
 from ica.forms import DatabaseEditForm, AnnouncementForm, EventForm
-from ica.utils import admin_required
+from ica.utils import admin_required, generate_event_code
 
 management = Blueprint('management', __name__,
                        template_folder='management')
@@ -116,7 +118,7 @@ def announcements():
 @login_required
 @admin_required
 def events():
-    fields = ['name', 'datetime', 'location', 'pts']
+    fields = ['name', 'datetime', 'location', 'pts', 'code', 'attended']
     events = Event.objects(author=current_user.id).only(
         *fields
     ).order_by('datetime').select_related()
@@ -127,8 +129,9 @@ def events():
             'datetime': form.datetime.data,
             'location': form.location.data,
             'description': form.description.data,
-            'pts': form.pts.data,
-            'author': current_user.id
+            'pts': math.ceil(form.pts.data),
+            'author': current_user.id,
+            'code': generate_event_code()
         }
 
         if form.fb_link.data:

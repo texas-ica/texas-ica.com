@@ -6,7 +6,7 @@ from flask_login import login_required, current_user
 from ica.models.user import User
 from ica.models.announcement import Announcement
 from ica.models.event import Event
-from ica.forms import ProfileForm, SearchForm
+from ica.forms import ProfileForm, SearchForm, CheckInForm
 from ica.utils import (
     get_file_extension, allowed_filename, upload_photo, get_recommended_users
 )
@@ -99,6 +99,49 @@ def followers():
         'user': current_user,
         'followers': followers
     })
+
+
+@social.route('/checkin', methods=['GET', 'POST'])
+@login_required
+def checkin():
+    checkin_form = CheckInForm(request.form)
+    context = {
+        'user': current_user,
+        'checkin_form': checkin_form
+    }
+
+    if request.method == 'POST' and checkin_form.validate():
+        code = checkin_form.code.data
+
+        # Get event correpsonding to that code
+        fields = ['code', 'name', 'pts']
+        events = Event.objects(code=code).only(*fields)
+
+        if not events:
+            # Event does not exist
+            msg_type = 'negative'
+            header = 'There was a problem in your request.'
+            flash('Sorry, this event does not exist.', 'error')
+        else:
+            # Update the event attended list and update
+            # the user's points with event's points
+            event = events.first()
+            event.update(add_to_set__attended=current_user.id)
+            user = User.objects(id=current_user.id).only(*['id'])
+            user.update(inc__points=event.pts)
+
+            msg_type = 'positive'
+            header = 'Your points were recorded!'
+            flash('You received {} points for {}!'.format(
+                event.pts, event.name
+            ))
+
+        context.update({
+            'msg_type': msg_type,
+            'header': header
+        })
+
+    return render_template('social/checkin.html', **context)
 
 
 @social.route('/settings', methods=['GET', 'POST'])

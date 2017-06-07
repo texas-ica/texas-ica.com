@@ -166,3 +166,14 @@ def upload_photo(photo_stream, filename, time, user_id):
 
     # Remove file from tmp
     os.remove(path)
+
+
+def generate_event_code():
+    """
+    Generates a six digit alphanumeric string that
+    allows members to check in to events
+    """
+
+    choices = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+    return ''.join(random.choice(choices) for i in range(6))

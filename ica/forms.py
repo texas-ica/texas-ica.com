@@ -165,3 +165,12 @@ class EventForm(FlaskForm):
     description = StringField('Description', [DataRequired()])
     pts = DecimalField('Points per Hour', [DataRequired()])
     fb_link = StringField('Facebook Event Link (optional)')
+
+
+class CheckInForm(FlaskForm):
+    """
+    Form used by users to check into an event; if the unique
+    code exists, users will get points for it
+    """
+
+    code = StringField('Event Code')
