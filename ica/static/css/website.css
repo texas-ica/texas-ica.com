@@ -9,7 +9,7 @@ h1, h2, h3, h4, h5 {
   font-weight: 400; }
 
 #jumbotron {
-  background-image: url("../img/tapestry.jpeg");
+  background-image: url("../img/header.jpg");
   background-size: cover; }
 
 #banner {
@@ -38,6 +38,8 @@ h1, h2, h3, h4, h5 {
   #join .grid {
     margin: 2% 0%;
     margin-bottom: 0; }
+  #join .ui.mini.image {
+    width: 55px; }
 
 #events {
   margin-top: 2%; }

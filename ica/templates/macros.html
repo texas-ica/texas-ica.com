@@ -27,3 +27,17 @@
     {% endif %}
 {% endwith %}
 {% endmacro %}
+
+{% macro render_error(header) %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="ui small negative message">
+            <i class="close icon"></i>
+            <div class="header">{{ header }}</div>
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+{% endmacro %}

@@ -14,7 +14,7 @@
 
 <div class="ui text center aligned container">
     <h2>{{ focus.fname }} {{ focus.lname }}</h2>
-    <img class="ui small rounded middle aligned image" src="{{ url_for('static', filename=focus.get_pfpic()) }}">
+    <img class="ui small rounded middle aligned image" src="{{ focus.get_pfpic() }}">
 </div>
 
 <div class="ui text container">

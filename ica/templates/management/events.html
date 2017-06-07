@@ -18,7 +18,7 @@
         <i class="big checked calendar middle aligned icon"></i>
         <div class="content">
             <p class="header">{{ event.name }} ({{ event.pts }} pts/hr)</p>
-            <div class="description">{{ event.datetime.strftime('%m/%d/%Y') }} @ {{ event.location }}</div>
+            <div class="description">{{ event.datetime.strftime('%m/%d/%Y') }} @ {{ event.location }}, ID: {{ event.code }}, {{ event.attended|length }} Participants</div>
         </div>
     </div>
     {% endfor %}

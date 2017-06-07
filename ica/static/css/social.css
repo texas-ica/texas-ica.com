@@ -52,6 +52,9 @@ a:hover {
   margin: 2% 0%;
   color: #000000; }
 
+.ui.message .header {
+  font-family: "Roboto", sans-serif; }
+
 #nav {
   border-radius: 0;
   box-shadow: none;
@@ -130,9 +133,9 @@ a:hover {
 #events .content .meta {
   padding-bottom: 1%; }
 
-#search {
+#search, #checkin {
   padding: 1%; }
-  #search input {
+  #search input, #checkin input {
     margin-right: 3%; }
 
 #recommended .description p {

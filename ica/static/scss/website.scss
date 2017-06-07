@@ -16,7 +16,7 @@ h1, h2, h3, h4, h5 {
 }
 
 #jumbotron {
-    background-image: url("../img/tapestry.jpeg");
+    background-image: url("../img/header.jpg");
     background-size: cover;
 }
 
@@ -63,6 +63,10 @@ h1, h2, h3, h4, h5 {
     .grid {
         margin: 2% 0%;
         margin-bottom: 0;
+    }
+
+    .ui.mini.image {
+        width: 55px;
     }
 }
 

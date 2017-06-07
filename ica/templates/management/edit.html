@@ -12,7 +12,7 @@
         <div class="right floated content">
             <a class="ui basic button" href="{{ url_for('management.edit_user', user_id=member.id) }}">Edit</a>
         </div>
-        <img class="ui mini rounded middle aligned image" src="{{ url_for('static', filename=member.get_pfpic()) }}">
+        <img class="ui mini rounded middle aligned image" src="{{ member.get_pfpic() }}">
         <div class="content">
             <h4 class="header">{{ member.fname }} {{ member.lname }}</h4>
             <div class="description">{{ member.year }}</div>
