@@ -6,12 +6,15 @@
 
 {% block content %}
 <div id="faq" class="ui text container">
-    {{ render_header('ICA Board', 'Frequently asked questions about ICA are listed below! Reach out to any board member for an answer to a question not listed. Think of one, we dare you.') }}
+    {{ render_header('ICA Board', 'Frequently asked questions about ICA are listed below. If you have a question or concern that has not been addressed below, please reach out to any ICA board member for an answer!') }}
     {{ render_faq('What do the membership dues cover?', 'The dues are $20 for the full year and $15 for one semester. By paying your dues, you will get an ICA t-shirt, free mango lassi at all Rasois (while supplies last), discounted tickets to signature events (such as Jhalak), and free admission into all ICA social, service, and professional events! ') }}
     {{ render_faq('What is Rasoi?', 'ICA hosts Rasoi on the first Wednesday of every month in West Mall, right next to the FAC. We sell fresh vegetarian and non-vegetarian Indian food at affordable prices. ICA members receive free mango lassi at all Rasois (while supplies last). Check out our Facebook page to see when the next Rasoi is!') }}
     {{ render_faq("How can I get more involved with ICA even if I'm not on the executive board?", 'We encourage all of our members to be active in ICA. One of the best ways to become more involved is to volunteer for Jhalak, the national Bollywood dance competition that ICA hosts every year. We also encourage all of our members to join either the social or service committee. Joining one of these committees is a great way to brainstorm and implement your ideas for future ICA social and service events.') }}
     {{ render_faq('Do I have to be Indian to join ICA?', 'No! ICA is open to members of all ethnicities and races, and we are proud to have a diverse member base.') }}
     {{ render_faq("What's the difference between ICA and ISA?", 'ICA and ISA are both UT South Asian organizations with different goals and events. ICA hosts Jhalak and Rasoi in addition to a variety of social, service, and cultural events primarily geared towards ICA members; ISA hosts Riyaaz, Taal, and other events for the Indian community on campus. ICA is proud to collaborate with ISA and other South Asian organizations on campus, and we work towards building an inclusive community.') }}
-    {{ render_faq('What is Jhalak?', "Jhalak is a national Bollywood fusion dance competition that ICA will be hosting for the 17th time this year on Saturday, November 18. Jhalak features competing teams from all across the nation, and we've had several successful sold-out shows. We encourage ICA members to get involved with Jhalak by volunteering, becoming a liaison, or attending the show! For more information, visit http://www.texasjhalak.com.") }}
+    <div class="ui vertical segment">
+        <h3>What is Jhalak?</h3>
+        <p>Jhalak is a national Bollywood fusion dance competition that ICA will be hosting for the 17th time this year on Saturday, November 18. Jhalak features competing teams from all across the nation, and we've had several successful sold-out shows. We encourage ICA members to get involved with Jhalak by volunteering, becoming a liaison, or attending the show! For more information, visit <a href="http://www.texasjhalak.com">http://www.texasjhalak.com</a>.</p>
+    </div>
 </div>
 {% endblock %}
