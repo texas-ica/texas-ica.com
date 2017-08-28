@@ -177,3 +177,19 @@ def generate_event_code():
     choices = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
     return ''.join(random.choice(choices) for i in range(6))
+
+
+def get_majors():
+    """
+    Gets a list of majors provided at UT and puts into a format
+    readable by the sign up form
+    """
+
+    parent = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    path = os.path.join(parent, 'ica', 'data', 'majors.txt')
+
+    f = open(path)
+    majors = [x.strip() for x in f.read().split('\n')]
+    f.close()
+
+    return [(x, x) for x in majors]

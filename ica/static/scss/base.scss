@@ -93,11 +93,20 @@ a:hover {
 
 .ui.footer {
     padding: 2% 0%;
-    background-color: $white;
+    background-color: #439fe0;
     box-shadow: 0px 500px 0px 500px $white;
 
     p {
+        color: $white;
         font-size: 14px;
+    }
+
+    a {
+        color: $white;
+    }
+
+    a:hover {
+        text-decoration: underline;
     }
 }
 

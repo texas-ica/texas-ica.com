@@ -8,7 +8,7 @@
 <div id="banner" class="ui center aligned text container">
     <img id="logo" class="ui small circular centered image" src="{{ url_for('static', filename='img/logo.jpg') }}">
     <h1 class="ui header">Indian Cultural Association</h1>
-    <p>Indian Cultural Association is where students and neighboring organizations come together to exercise culture, service, friendship, professionalism and leadership to bring a long lasting change.</p>
+    <p>Culture • Community • Camaradarie</p>
 </div>
 {% endblock %}
 
@@ -18,9 +18,9 @@
         {{ render_header('About Us', 'ICA is an organization that creates, innovates, and introduces current topics in India to captivate and educate our audience everywhere. We are an organization that people fit into, changes a community into a family, and brings India to Austin.') }}
         <div class="ui center aligned stackable three column grid">
             <div class="row">
-                {{ render_about('Culture', 'ICA leads a national signature dance competition with rich Indian dance forms and music styles, holds monthly diverse Indian cuisines, and routinely updates members on historical and cultural facts about India.', 'img/culture.jpg') }}
-                {{ render_about ('Community', 'From tutoring elementary schoolers to gardening to joining Texans for Israel in hosting a Hanukkah Diwali dinner, ICA strongly believes in ingraining itself into the community through service.', 'img/community.jpg') }}
-                {{ render_about('Camaradarie', 'With social events like playing Antakshari, painting the walls of Graffiti Park and flying kites at Zilker Park for Makar Sankranti, ICA accepts everyone at their craziest, wildest, truest selves.', 'img/camaradarie.jpg') }}
+                {{ render_about('Culture', 'ICA hosts a national Bollywood-fusion dance competition that showcases a variety of Indian dance styles, serves fresh Indian food on campus, and routinely updates members on historical and cultural facts about India.', 'img/culture.jpg') }}
+                {{ render_about ('Community', 'From tutoring young students around the Austin area to helping host a Hanukkah Diwali dinner, ICA strongly believes in ingraining itself into the community through various service opportunities.', 'img/community.jpg') }}
+                {{ render_about('Camaradarie', 'With social events like playing Antakshari, painting the walls of Graffiti Park, and competing at Field Day, ICA accepts everyone at their craziest, wildest, truest selves.', 'img/camaradarie.jpg') }}
             </div>
         </div>
     </div>
@@ -33,12 +33,12 @@
             <div class="row">
                 {{ render_join('Apparel', "All paid members will receive an 2017-2018 ICA shirt. Keep an eye out for this year's beautiful new design!", 'img/shirt.png') }}
                 {{ render_join('Discounts', 'ICA members receive a wide array of discounts for official ICA events - including Jhalak!', 'img/coin.png') }}
-                {{ render_join('Food & Drinks', 'Every member will have access to free mango lassi every month during Rasoi and more.', 'img/coffee.png') }}
+                {{ render_join('Food & Drinks', 'All members can get free mango lassi every month during Rasoi (while supplies last) and much more!', 'img/coffee.png') }}
             </div>
             <div class="row">
-                {{ render_join('Socials', 'We are focused on creating a friendly atmosphere by hosting an array of fun social events.', 'img/friends.png') }}
+                {{ render_join('Socials', 'We are focused on creating a friendly atmosphere by hosting a number of fun social events.', 'img/friends.png') }}
                 {{ render_join('Academics', 'ICA helps members grow academically through workshops, study hours, and guest speaker seminars.', 'img/gears.png') }}
-                {{ render_join('Career', 'ICA members get free access to professional development techniques, internship, recruitment, and graduate school advice, and the opportunity to network with our large group of well-rounded alumni.', 'img/work.png') }}
+                {{ render_join('Career', 'ICA members get free access to many professional development resources and the opportunity to network with our diverse group of alumni.', 'img/work.png') }}
             </div>
         </div>
     </div>
@@ -46,17 +46,17 @@
 
 <div id="events" class="ui vertical segment">
     <div class="ui container">
-        {{ render_header('Our Events', 'ICA hosts a multitude of social and service events throughout the school year. Popular social events include trivia night, field day, and and weekly study hours. We also have many service events on and off campus in order to help the Austin community.') }}
+        {{ render_header('Our Events', 'ICA hosts a multitude of social and service events throughout the school year. Popular social events include Trivia Night, Field Day, and and weekly study hours. We also have many service events on and off campus in order to contribute to the Austin community.') }}
         <div class="ui center aligned stackable three column grid">
             <div class="row">
-                {{ render_event('Jhalak', 'Jhalak is an intercollegiate Bollywood-Fusion dance competition that seeks to showcase the talents of some of the best and brightest teams across the nation.', 'img/jhalak.jpg') }}
-                {{ render_event('Rasoi', 'Every month, the mouthwatering aroma of Indian food makes its way around campus as ICA hosts Rasoi: Fresh Indian Food on Campus, attracting all food lovers.', 'img/rasoi.jpg') }}
-                {{ render_event('Study Hours', "Studying is always more fun in a group! That's why ICA hosts weekly study hours for all members to gather and help each other get through the long days and even longer nights.", 'img/studyhours.jpg') }}
+                {{ render_event('Jhalak', 'Jhalak is an intercollegiate Bollywood-Fusion dance competition that seeks to showcase the talents of some of the most talented teams across the nation.', 'img/jhalak.jpg') }}
+                {{ render_event('Rasoi', 'Every month, the mouthwatering aroma of Indian food makes its way around campus as ICA hosts Rasoi: fresh Indian food on campus, attracting all food lovers.', 'img/rasoi.jpg') }}
+                {{ render_event('Study Hours', "Studying is always more fun in a group! That's why ICA hosts weekly study hours for all members to help each other get through the long days and even longer nights.", 'img/studyhours.jpg') }}
             </div>
             <div class="row">
                 {{ render_event('Trivia Night', 'Held once a year, this is one of our largest and most competitive events! Questions range from beauty to pop culture to the Olympics. Come show us what you\'ve got!', 'img/trivianight.jpg') }}
                 {{ render_event('Bollywood Movie Night', "Relax and unwind with your friends, free snacks, and some of Bollywood's biggest stars.", 'img/bwn.jpg') }}
-                {{ render_event('Game Day', 'De-stress and have a great time playing different individual and team games, from Ultimate Frisbee to Capture the Flag.', 'img/gameday.jpg') }}
+                {{ render_event('Field Day', 'De-stress and have a great time playing different individual and team games, from Ultimate Frisbee to Capture the Flag.', 'img/gameday.jpg') }}
             </div>
         </div>
     </div>
@@ -66,11 +66,13 @@
     <div class="ui container">
         <div class="ui center aligned text container">
             <h1>Contact Us</h1>
-            <p>If you have any questions at all or want to get in touch with a board member, please don't hesistate to contact us! We're here to help and make your college experience the best it can be.</p>
+            <p>If you have any questions at all or want to get in touch with a board member, please don't hesitate to contact us! We're here to help make your college experience the best it can be.</p>
             <div class="ui two column middle aligned stackable grid">
                 <div class="column">
                     <p>Indian Cultural Association<br>100B W Dean Keeton St<br>Austin, TX 78712<br></p>
-                    <p>Email: <a href="mailto:membership@texas-ica.com">membership@texas-ica.com</a></p>
+                    <p>
+                        Email: <a href="mailto:membership@texas-ica.com">membership@texas-ica.com</a><br>
+                    </p>
                 </div>
                 <div class="column">
                     <div class="ui medium rounded left floated image">

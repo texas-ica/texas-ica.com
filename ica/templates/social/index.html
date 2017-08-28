@@ -17,7 +17,7 @@
             </div>
             <div class="content">
                 <div class="summary">
-                    <a class="user">{{ msg.author.fname }} {{ msg.author.lname }}</a>
+                    <a data-tooltip="{{ msg.author.fname }} {{ msg.author.lname }} - {{ msg.author.major }} - {{ msg.author.year }}" data-position="top left" class="user">{{ msg.author.fname }} {{ msg.author.lname }}</a>
                     <div class="date">{{ msg.creation_date.strftime('%m/%d') }}</div>
                 </div>
                 <div class="extra text">{{ msg.message }}</div>
@@ -42,7 +42,7 @@
                     <div class="meta">
                         <span>{{ event.datetime.strftime('%m/%d') }} @ {{ event.location }}</span>
                     </div>
-                    <p>{{ event.description|truncate(150) }}</p>
+                    <p>{{ event.description|truncate(150) }} {% if event.fb_link %}<a href="{{ event.fb_link }}">See More</a>{% endif %}</p>
                 </div>
             </div>
         </div>

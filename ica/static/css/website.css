@@ -8,15 +8,16 @@ h1, h2, h3, h4, h5 {
   font-family: inherit;
   font-weight: 400; }
 
+.ui.vertical.segment {
+  border-bottom: 1px solid #00A8E8; }
+
 #jumbotron {
-  background-image: url("../img/header.jpg");
-  background-size: cover; }
+  background-color: #00A8E8; }
 
 #banner {
   padding: 5%; }
   #banner .ui.header, #banner p {
-    color: #FFFFFF;
-    text-shadow: 1px 1px 5px #000000; }
+    color: #FFFFFF; }
 
 #about {
   margin-top: 2%; }

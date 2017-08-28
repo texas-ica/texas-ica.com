@@ -1,5 +1,5 @@
 {% extends "website/layout.html" %}
-{% from "website/macros.html" import render_header %}
+{% from "website/macros.html" import render_header, render_post %}
 
 {% block title %}ICA - Blog{% endblock %}
 {% block nav_blog %}<a class=" active item" href="{{ url_for('website.blog') }}">Blog</a>{% endblock %}
@@ -7,21 +7,9 @@
 {% block content %}
 <div id="blog" class="ui text container">
     {{ render_header('ICA Blog', 'Welcome to the ICA Blog! Feel free to share your experience at any social or service events ICA related. Have your friends see what they are missing out on while earning some extra points too!') }}
-    <div class="ui vertical segment post">
-        <h2 class="ui header">
-            Blog Post #2
-            <div class="sub header">ICA Member // May 22, 2017</div>
-        </h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim ac justo non vestibulum. Pellentesque mauris sem, suscipit eu erat nec, aliquet congue erat. Donec cursus ipsum at sapien volutpat pretium. Sed felis magna, placerat id congue a, dapibus ut velit. Maecenas maximus lacus odio. Pellentesque rhoncus lacus scelerisque lacinia dapibus. Proin a ante nulla.</p>
-        <p>Vestibulum dignissim ex in ligula lacinia malesuada. Vestibulum semper felis vitae lobortis malesuada. Nunc auctor nisi in nisi posuere, non pretium elit tempor. Vestibulum pharetra eu augue non aliquet. In tincidunt facilisis ultrices. Duis non dignissim ligula. Vestibulum ac leo quis risus faucibus scelerisque. Duis ornare nulla in pharetra euismod. Nullam sodales est quis mi placerat, eget posuere neque ultricies. Cras commodo tempus lorem. Fusce quam augue, porta non nunc ullamcorper, feugiat auctor erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam posuere varius eleifend. In hac habitasse platea dictumst.</p>
-    </div>
-    <div class="ui vertical segment post">
-        <h2 class="ui header">
-            Blog Post #1
-            <div class="sub header">ICA Member // March 29, 2017</div>
-        </h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim ac justo non vestibulum. Pellentesque mauris sem, suscipit eu erat nec, aliquet congue erat. Donec cursus ipsum at sapien volutpat pretium. Sed felis magna, placerat id congue a, dapibus ut velit. Maecenas maximus lacus odio. Pellentesque rhoncus lacus scelerisque lacinia dapibus. Proin a ante nulla.</p>
-        <p>Vestibulum dignissim ex in ligula lacinia malesuada. Vestibulum semper felis vitae lobortis malesuada. Nunc auctor nisi in nisi posuere, non pretium elit tempor. Vestibulum pharetra eu augue non aliquet. In tincidunt facilisis ultrices. Duis non dignissim ligula. Vestibulum ac leo quis risus faucibus scelerisque. Duis ornare nulla in pharetra euismod. Nullam sodales est quis mi placerat, eget posuere neque ultricies. Cras commodo tempus lorem. Fusce quam augue, porta non nunc ullamcorper, feugiat auctor erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam posuere varius eleifend. In hac habitasse platea dictumst.</p>
+    {{ render_post('Join ICA #3', 'Thiru Vinayagam // July 22, 2017', 'ICA has provided me with an opportunity to pursue leadership in other organizations such as HAC (Hindus Against Casteism). Throughout my time in ICA, I have built personal relationships with many members of the organization. I was even introduced to my main group of friends and mentors through ICA. ICA service events are an extremely enjoyable experience. The events I have gone to, including tutoring and a local after school program, have been both eye opening and fulfilling projects. They have expanded my view on both the Austin area and on education for different socioeconomic levels.', 'Even if ICA is the only group you join, you will find that it incorporates aspects of every different type of organization, from socials to service to food and dance.') }}
+    {{ render_post('Join ICA #2', 'Saher Ahmad // July 22, 2017', 'Joining ICA has hands down been the best decision I\'ve made since coming to UT. At a school this big, it is easy to feel lonely and out of place; however, ICA has played a major part in it becoming a friendly and hospitable environment. I personally feel like we are all a close-knit family, and that we can all count on each other- which is a big thing to say about people I haven\'t known very long. Everyone has a certain vibe and a certain niche here. The friends I have made in ICA are people I imagine I will be around for a good portion of my life, and for that I\'m very grateful.') }}
+    {{ render_post('Join ICA #1', 'Sanskriti Agarwal // July 22, 2017', 'It\'s been a great year with ICA. Of the many activities we did from field day to Rasoi, I enjoyed Jhalak the most. In the couple of weeks that we worked together to help the board execute an amazing event, I got to make new friends and become a part of something very exciting! Being a part of the event is an experience that I\'m glad I had as a freshman, and the most fun part was being a part of the mixer. Plus... you get to see some sick moves!!') }}
     </div>
 </div>
 {% endblock %}

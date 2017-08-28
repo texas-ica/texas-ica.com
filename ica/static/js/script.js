@@ -5,6 +5,12 @@
     // apps dropdown
     $('#nav-apps').dropdown();
 
+    // events modal
+    $('#event-link').on('click', function() {
+        $('#event-modal .header').text('Testing...');
+        $('#event-modal').modal('show');
+    });
+
     // board members
     var members = 14;
     for (var i = 0; i <= members; i++) {

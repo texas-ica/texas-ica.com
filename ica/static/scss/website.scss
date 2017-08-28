@@ -15,9 +15,14 @@ h1, h2, h3, h4, h5 {
     }
 }
 
+.ui.vertical.segment {
+    border-bottom: 1px solid $vivid-cerulean;
+}
+
 #jumbotron {
-    background-image: url("../img/header.jpg");
-    background-size: cover;
+    //background-image: url("../img/header.jpg");
+    //background-size: cover;
+    background-color: $vivid-cerulean;
 }
 
 #banner {
@@ -25,7 +30,7 @@ h1, h2, h3, h4, h5 {
 
     .ui.header, p {
         color: $white;
-        text-shadow: 1px 1px 5px $black;
+        //text-shadow: 1px 1px 5px $black;
     }
 }
 

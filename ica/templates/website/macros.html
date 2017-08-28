@@ -49,3 +49,15 @@
     </div>
 {% endif %}
 {% endmacro %}
+
+{% macro render_post(title, author, p1, p2, p3) %}
+<div class="ui vertical segment post">
+    <h2 class="ui header">
+        {{ title }}
+        <div class="sub header">{{ author }}</div>
+    </h2>
+    <p>{{ p1 }}</p>
+    {% if p2 %}<p>{{ p2 }}</p>{% endif %}
+    {% if p3 %}<p>{{ p3 }}</p>{% endif %}
+</div>
+{% endmacro %}

@@ -72,10 +72,15 @@ a:hover {
 
 .ui.footer {
   padding: 2% 0%;
-  background-color: #FFFFFF;
+  background-color: #439fe0;
   box-shadow: 0px 500px 0px 500px #FFFFFF; }
   .ui.footer p {
+    color: #FFFFFF;
     font-size: 14px; }
+  .ui.footer a {
+    color: #FFFFFF; }
+  .ui.footer a:hover {
+    text-decoration: underline; }
 
 #error {
   margin: 2% 0%; }

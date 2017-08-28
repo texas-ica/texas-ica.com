@@ -11,6 +11,7 @@ from wtforms.validators import (
 from ica.models.user import User
 from ica.logger import client
 from ica.tasks import low_queue
+from ica.utils import get_majors
 
 
 class SignUpForm(FlaskForm):
@@ -24,7 +25,7 @@ class SignUpForm(FlaskForm):
         DataRequired(), EqualTo('pwd', message='Passwords must match.')
     ])
     hometown = StringField('Hometown', [DataRequired()])
-    major = StringField('Major', [DataRequired()])
+    major = SelectField('Major', [DataRequired()], choices=get_majors())
     year = SelectField('Year', [DataRequired()], choices=[
         ('Freshman', 'Freshman'), ('Sophomore', 'Sophomore'),
         ('Junior', 'Junior'), ('Senior', 'Senior'),
