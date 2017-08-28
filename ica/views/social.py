@@ -168,10 +168,6 @@ def settings():
 @social.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload_pfpic():
-    cl = request.content_length
-    if cl is not None and cl > 0.5 * 1024 * 1024:
-        abort(413)
-
     if request.method == 'POST':
         # Check if request has the file part
         if 'file' not in request.files:
@@ -188,6 +184,11 @@ def upload_pfpic():
         if not allowed_filename(pic.filename, ALLOWED_EXTENSIONS):
             flash('You selected an incorrect file type. Only ' +
                   ' png, jpg, jpeg, and gif types are allowed.', 'error')
+            return redirect(url_for('social.settings'))
+
+        cl = request.content_length
+        if cl is not None and cl > 0.5 * 1024 * 1024:
+            flash('Size of profile picture must be less than 500 KB.', 'error')
             return redirect(url_for('social.settings'))
 
         if pic and allowed_filename(pic.filename, ALLOWED_EXTENSIONS):
