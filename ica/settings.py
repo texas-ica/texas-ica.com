@@ -4,7 +4,7 @@ import os
 class Config(object):
     SECRET_KEY = os.getenv('SECRET_KEY')
     CSRF_TOKEN = os.getenv('CSRF_TOKEN')
-    MAX_CONTENT_LENGTH = 0.5 * 1024 * 1024
+    MAX_CONTENT_LENGTH = 100 * 1024 * 1024
     CACHE_TYPE = 'redis'
     CACHE_REDIS_URL = os.getenv('REDISCLOUD_URL')
     SLACK_API_KEY = os.getenv('SLACK_API_KEY')
