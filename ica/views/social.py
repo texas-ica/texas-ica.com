@@ -1,6 +1,6 @@
 import datetime
 
-from flask import Blueprint, render_template, redirect, request, flash, url_for
+from flask import Blueprint, render_template, redirect, request, flash, url_for, abort
 from flask_login import login_required, current_user
 
 from ica.models.user import User
@@ -168,6 +168,10 @@ def settings():
 @social.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload_pfpic():
+    cl = request.content_length
+    if cl is not None and cl > 0.5 * 1024 * 1024:
+        abort(413)
+
     if request.method == 'POST':
         # Check if request has the file part
         if 'file' not in request.files:
