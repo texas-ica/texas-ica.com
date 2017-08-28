@@ -100,7 +100,7 @@ def internal_server_error(error):
 def request_entity_error(error):
     header = 'Request Entity Too Large'
     text = 'You tried to upload a file that was too large! We only' + \
-           ' support files under 500 KB, so please try again.'
+           ' support uploading photos under 500 KB, so please try again.'
 
     if hasattr(current_user, 'id'):
         fname, lname = current_user.fname, current_user.lname
