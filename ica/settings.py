@@ -19,8 +19,8 @@ class ProductionConfig(Config):
 
 
 class DevelopmentConfig(Config):
-    DEBUG = True
-    TESTING = True
+    DEBUG = False
+    TESTING = False
     DATABASE_NAME = 'heroku_b694ljx0'
     DATABASE_USER = os.getenv('DEV_DATABASE_USER')
     DATABASE_PASSWORD = os.getenv('DEV_DATABASE_PASSWORD')
