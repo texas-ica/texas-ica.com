@@ -23,7 +23,7 @@
             {% block nav_board %}<a class="item" href="{{ url_for('website.board') }}">Board</a>{% endblock %}
             {% block nav_faq %}<a class="item" href="{{ url_for('website.faq') }}">FAQ</a>{% endblock %}
             {% if user and user.is_authenticated %}<a class="item" href="{{ url_for('social.index') }}">Members</a>{% endif %}
-            <a class="item" href="http://texasjhalak.com">Jhalak</a>
+            <a class="item" href="http://texasjhalak.com" target="_blank">Jhalak</a>
 
             <div class="right menu">
                 {% if user and user.is_authenticated %}
