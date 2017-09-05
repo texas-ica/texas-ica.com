@@ -60,9 +60,9 @@ def page_not_found(error):
 
     if hasattr(current_user, 'id'):
         fname, lname = current_user.fname, current_user.lname
-        msg = '404 from {} {}'.format(fname, lname)
+        msg = '404 ({}) from {} {}'.format(request.url, fname, lname)
     else:
-        msg = '404 from Anonymous'
+        msg = '404 ({}) from Anonymous'.format(request.url)
 
     high_queue.enqueue(
         client.log_event,
