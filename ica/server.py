@@ -58,6 +58,7 @@ def page_not_found(error):
     text = 'What you were looking for is just not there. ' + \
            'Go somewhere nicer.'
 
+    """
     if hasattr(current_user, 'id'):
         fname, lname = current_user.fname, current_user.lname
         msg = '404 ({}) from {} {}'.format(request.url, fname, lname)
@@ -69,6 +70,7 @@ def page_not_found(error):
         request.headers.get('X-Forwarded-For', request.remote_addr),
         '{} ({})'.format(msg, error)
     )
+    """
 
     return render_template('error.html', user=current_user,
                             header=header, text=text), 404
