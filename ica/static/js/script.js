@@ -12,7 +12,7 @@
     });
 
     // board members
-    var members = 14;
+    var members = 15;
     for (var i = 0; i <= members; i++) {
         var prof_id = '#prof-' + i;
 
