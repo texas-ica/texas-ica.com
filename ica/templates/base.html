@@ -24,6 +24,7 @@
             {% block nav_faq %}<a class="item" href="{{ url_for('website.faq') }}">FAQ</a>{% endblock %}
             {% if user and user.is_authenticated %}<a class="item" href="{{ url_for('social.index') }}">Members</a>{% endif %}
             <a class="item" href="http://texasjhalak.com" target="_blank">Jhalak</a>
+            {% block nav_pennmasala %}<a class="item" href="{{ url_for('website.pennmasala') }}">Penn Masala</a>{% endblock %}
 
             <div class="right menu">
                 {% if user and user.is_authenticated %}
