@@ -46,11 +46,6 @@ def faq():
         'user': current_user
     })
 
-@website.route('/pennmasala', methods=['GET'])
-def pennmasala():
-    return render_template('website/pennmasala.html', **{
-        'user': current_user
-})
 
 @website.route('/signup', methods=['GET', 'POST'])
 def signup():
