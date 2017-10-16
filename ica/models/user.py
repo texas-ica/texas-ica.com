@@ -1,6 +1,6 @@
 from mongoengine import (
     Document, StringField, BooleanField, IntField,
-    ListField, ReferenceField
+    ListField, ReferenceField, FloatField
 )
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -32,7 +32,7 @@ class User(Document, UserMixin):
     hometown = StringField(required=True)
 
     # Number of ICA points user has
-    points = IntField(default=0)
+    points = FloatField(default=0)
 
     # Profile bio (optional)
     bio = StringField()
