@@ -23,11 +23,12 @@ f = open('points.txt')
 data = f.read().split('\n')
 
 for line in data:
-    fname, lname, points = line.split('\t')
+    if line:
+        fname, lname, points = line.split('\t')
 
-    user = find_user(fname, lname)
-    if user:
-        user.update(set__points=points)
-        print('Set {} {}\'s points to {}'.format(
-            user.fname, user.lname, points
-        ))
+        user = find_user(fname, lname)
+        if user:
+            user.update(set__points=points)
+            print('Set {} {}\'s points to {}'.format(
+                user.fname, user.lname, points
+            ))
